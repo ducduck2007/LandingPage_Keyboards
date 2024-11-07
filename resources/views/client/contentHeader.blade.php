@@ -20,12 +20,11 @@
                     aria-label="Slide 2"></button>
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="assets/images/demo.png" class="d-block w-100 imgCarousel" height="600px" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="assets/images/demo.png" class="d-block w-100 imgCarousel" height="600px" alt="...">
-                </div>
+                @foreach ($image_header as $index => $ih)
+                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                        <img src="{{ $ih->image }}" class="d-block w-100 imgCarousel" height="600px" alt="...">
+                    </div>
+                @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev">

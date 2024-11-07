@@ -11,7 +11,8 @@ class HomeController extends Controller
     public function index()
     {
         $deal_sale = DB::select("SELECT * FROM deal_sale");
+        $image_header = DB::select("SELECT * FROM image_header");
 
-        return view('home', compact('deal_sale'));
+        return view('home', compact('deal_sale', 'image_header'));
     }
 }

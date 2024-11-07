@@ -25,9 +25,9 @@
 
     <div class="col-12 bg002 p-3 d-flex flex-column justify-content-center ps-4 pe-4" style="overflow: hidden;">
         <div class="col-12 d-flex gap-2 mb-3">
-            <div class="panel active text-light p-2 ps-5 pe-5" id="panel1">Panel 1</div>
-            <div class="panel text-light p-2 ps-5 pe-5" id="panel2">Panel 2</div>
-            <div class="panel text-light p-2 ps-5 pe-5" id="panel3">Panel 3</div>
+            <div class="panel active text-light p-2 ps-5 pe-5" id="panel1">Bàn phím cơ</div>
+            <div class="panel text-light p-2 ps-5 pe-5" id="panel2">Bàn phím văn phòng</div>
+            <div class="panel text-light p-2 ps-5 pe-5" id="panel3">Keycaps</div>
         </div>
 
         <div id="tablepanel1">
