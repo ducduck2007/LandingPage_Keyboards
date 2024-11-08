@@ -9,7 +9,7 @@
             <div class="col-md-8">
                 <div class="page-title-box">
 
-                    <h4>Tạo thông tin sản phẩm mới</h4>
+                    <h4>Sửa thông tin sản phẩm</h4>
 
                     <!-- <p>Nhập các thông tin để thêm tài khoản CMS</p> -->
                     @if ($errors->any())
@@ -24,54 +24,55 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body" style="padding-top: 0px;">
-                    <form action="{{ route('header.postCreate') }}" method="post" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div><br></div>
+                    <form action="{{ route('image_header.postUpdate', ['id' => $model->id]) }}" method="post"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <br>
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
                                     <label class="col-form-label">Tiêu đề</label>
-                                    <input class="form-control" type="text" name="title"
-                                        placeholder="Nhập tiêu đề thông tin sản phẩm" value="{{ old('title') }}">
+                                    <input class="form-control" type="text" name="title" required
+                                        placeholder="Nhập tiêu đề" value="{{ old('title', $model->title) }}">
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Nội dung</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="content" placeholder="Nội dung" rows="3" cols="10">{{ old('content', $model->content) }}</textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nội dung</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="content" placeholder="Nhập nội dung (quy định không quá 250 ký tự)" rows="3"
-                                    cols="10">{{ old('content') }}</textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row align-items-center">
-                            <label for="image" class="col-sm-2 col-form-label">Ảnh:</label>
-
+                            <label for="image" class="col-sm-2 control-label">Ảnh Image
+                                {{-- <span style="color: red">(800x450)</span>: --}}
+                            </label>
                             <div class="col-sm-3">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="image" id="image"
                                         accept="image/png, image/jpg, image/gif, image/jpeg" onchange="previewImage(event)">
-                                    <label class="custom-file-label" for="image">Chọn ảnh...</label>
+                                    <label class="custom-file-label" for="image">Chọn ảnh Image</label>
                                 </div>
                             </div>
-
                             <div class="col-sm-5">
-                                <a href="#" class="d-block mt-2">
-                                    <img src="#" id="example_Image" class="img-thumbnail" width="150"
+                                <a href="{{ asset($model->image) }}">
+                                    <img src="{{ asset($model->image) }}" id="example_Image" width="150"
                                         alt="Preview Image">
                                 </a>
                             </div>
                         </div>
 
-
                         <div style="height:25px"></div>
 
                         <div class="form-group mb-0">
                             <div>
-                                <a href="{{ route('header.index') }}" class="btn btn-secondary waves-effect waves-light">
+                                <a style="background-color: #34495e; border-color:#34495e;color:whitesmoke;"
+                                    href="{{ route('image_header.index') }}" class="btn waves-effect waves-light">
                                     QUAY LẠI
                                 </a>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light" id="submitSearch">
+                                <button style="background-color: #9b59b6; border-color:#9b59b6;color:whitesmoke;"
+                                    type="submit" class="btn waves-effect waves-light" id="submitSearch">
                                     CẬP NHẬT
                                 </button>
 
@@ -83,14 +84,18 @@
 
             </div>
         </div>
-    @endsection
-    @section('js')
-        <script>
-            $(document).ready(function() {
-                $('#image').change(function(event) {
-                    var tmppath = URL.createObjectURL(event.target.files[0]);
-                    $('#example_Image').attr('src', tmppath);
-                });
-            })
-        </script>
-    @endsection
+    </div>
+@endsection
+@section('js')
+    <script src="{{ asset('assets/plugins/select2-4.1.0/dist/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#image').change(function(event) {
+                var tmppath = URL.createObjectURL(event.target.files[0]);
+                $('#example_Image').attr('src', tmppath);
+            });
+        })
+    </script>
+@endsection

@@ -15,6 +15,11 @@
 
                 <li @if ($routeName == 'header.index' || $routeName == 'header.update' || $routeName == 'header.create') class='mm-active' @endif><a href="{{ route('header.index') }}"
                         class="waves-effect"><span>Thông tin sản phẩm</span></a></li>
+                <li @if ($routeName == 'image_header.index' || $routeName == 'image_header.update' || $routeName == 'image_header.create') class='mm-active' @endif><a
+                        href="{{ route('image_header.index') }}" class="waves-effect"><span>Ảnh Carousel</span></a></li>
+                <li @if ($routeName == 'bestSelling.index' || $routeName == 'bestSelling.update' || $routeName == 'bestSelling.create') class='mm-active' @endif><a
+                        href="{{ route('bestSelling.index') }}" class="waves-effect"><span>Sản phẩm bán chạy</span></a>
+                </li>
             </ul>
         </li>
         {{-- <li @if ($routeName == 'link_copy.index' || $routeName == 'link_copy.update' || $routeName == 'link_copy.create') class='mm-active' @endif><a href="{{ route('link_copy.index') }}"

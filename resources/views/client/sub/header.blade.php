@@ -2,7 +2,7 @@
     <nav class="container container_nav d-flex align-items-center justify-content-between">
         <div class="left_nav d-flex align-items-center">
             <div class="logo d-flex align-items-center gap-2">
-                <img src="assets/images/logo.webp" alt="logo" height="60px" width="60px">
+                <img src="assets/images/logo.png" alt="logo" height="60px" width="60px">
                 <div class="namePage text-light fw-bold" style="font-family: unset !important;">Đƚԋɳιҽɳ <br> VHB
                 </div>
             </div>

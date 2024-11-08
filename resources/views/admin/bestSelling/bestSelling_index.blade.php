@@ -12,7 +12,7 @@
         <div class="row align-items-center ">
             <div class="col-md-8">
                 <div class="page-title-box">
-                    <h4 class="page-title"> DANH SÁCH SẢN PHẨM NỔI BẬT</h4>
+                    <h4 class="page-title"> DANH SÁCH SẢN PHẨM BÁN CHẠY</h4>
                     @if ($errors->any())
                         <span style="color:red">{{ $errors->first() }}</span>
                     @endif
@@ -49,9 +49,11 @@
                                 <!-- STT	UserID	Server	Question	Answer	Time	Status	Reply -->
                                 <thead>
                                     <th>STT</th>
-                                    <th>Tiêu đề</th>
-                                    <th>Nội dung</th>
-                                    <th>Image</th>
+                                    <th>Ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá sản phẩm</th>
+                                    <th>Mô tả sản phẩm</th>
+                                    <th>Lượt bán</th>
                                     <th>Hành động</th>
                                 </thead>
 
@@ -59,12 +61,14 @@
                                     @foreach ($data as $d)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $d->title }}</td>
-                                            <td>{!! $d->content !!}</td>
                                             <td><img style="width: 100px;"src={{ asset($d->image) }} alt=""></td>
+                                            <td>{{ $d->name_product }}</td>
+                                            <td>{{ $d->product_price }}</td>
+                                            <td>{{ $d->mo_ta }}</td>
+                                            <td>{{ $d->sales }}</td>
                                             <td>
                                                 <a style="background-color: #3498db; border-color:#3498db;color:whitesmoke;"
-                                                    href="{{ route('header.update', ['id' => $d->id]) }}"
+                                                    href="{{ route('bestSelling.update', ['id' => $d->id]) }}"
                                                     class="btn waves-effect waves-light">SỬA</a>
                                                 {{-- <a href="{{ route('header.delete') }}" value="{{ $d->id }}"
                                                     class="btn btn-danger btn-md btn-dell">Xóa</a> --}}

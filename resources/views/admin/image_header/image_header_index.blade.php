@@ -12,7 +12,7 @@
         <div class="row align-items-center ">
             <div class="col-md-8">
                 <div class="page-title-box">
-                    <h4 class="page-title"> DANH SÁCH SẢN PHẨM NỔI BẬT</h4>
+                    <h4 class="page-title"> DANH SÁCH ẢNH</h4>
                     @if ($errors->any())
                         <span style="color:red">{{ $errors->first() }}</span>
                     @endif
@@ -26,10 +26,10 @@
                 <div class="card-body" style="padding-bottom: 0px!important;padding-top: 0px!important;">
                     <div class="form-group mb-0">
                         <div><br></div>
-                        {{-- <a href="{{ route('header.create') }}" name="create"
+                        <a href="{{ route('image_header.create') }}" name="create"
                             class="btn btn-success waves-effect waves-light">
                             Thêm mới
-                        </a> --}}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 <div class="card-body">
 
                     @isset($data)
-                        {{-- <p>Danh sách header</p> --}}
+                        {{-- <p>Danh sách image_header</p> --}}
                         <div class="table-responsive">
                             <input type="hidden" id="token" value="{{ csrf_token() }}">
 
@@ -48,26 +48,22 @@
                                 class="display" style="width:100%">
                                 <!-- STT	UserID	Server	Question	Answer	Time	Status	Reply -->
                                 <thead>
-                                    <th>STT</th>
-                                    <th>Tiêu đề</th>
-                                    <th>Nội dung</th>
+                                    <th style="width: 20%">STT</th>
                                     <th>Image</th>
-                                    <th>Hành động</th>
+                                    <th style="width: 20%">Hành động</th>
                                 </thead>
 
                                 <tbody>
                                     @foreach ($data as $d)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $d->title }}</td>
-                                            <td>{!! $d->content !!}</td>
-                                            <td><img style="width: 100px;"src={{ asset($d->image) }} alt=""></td>
+                                            <td><img style="width: 150px;"src={{ asset($d->image) }} alt=""></td>
                                             <td>
                                                 <a style="background-color: #3498db; border-color:#3498db;color:whitesmoke;"
-                                                    href="{{ route('header.update', ['id' => $d->id]) }}"
+                                                    href="{{ route('image_header.update', ['id' => $d->id]) }}"
                                                     class="btn waves-effect waves-light">SỬA</a>
-                                                {{-- <a href="{{ route('header.delete') }}" value="{{ $d->id }}"
-                                                    class="btn btn-danger btn-md btn-dell">Xóa</a> --}}
+                                                <a href="{{ route('image_header.delete') }}" value="{{ $d->id }}"
+                                                    class="btn btn-danger btn-md btn-dell">Xóa</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -135,7 +131,7 @@
                         if (result == true) {
                             $.ajax({
                                 type: 'post',
-                                url: '{{ route('header.delete') }}',
+                                url: '{{ route('image_header.delete') }}',
                                 data: {
                                     id: id,
                                     _token: $('#ajaxToken').val()

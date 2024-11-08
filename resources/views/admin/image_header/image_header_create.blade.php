@@ -9,7 +9,7 @@
             <div class="col-md-8">
                 <div class="page-title-box">
 
-                    <h4>Tạo thông tin sản phẩm mới</h4>
+                    <h4>Tạo mới</h4>
 
                     <!-- <p>Nhập các thông tin để thêm tài khoản CMS</p> -->
                     @if ($errors->any())
@@ -24,26 +24,10 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body" style="padding-top: 0px;">
-                    <form action="{{ route('header.postCreate') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('image_header.postCreate') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div><br></div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label class="col-form-label">Tiêu đề</label>
-                                    <input class="form-control" type="text" name="title"
-                                        placeholder="Nhập tiêu đề thông tin sản phẩm" value="{{ old('title') }}">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nội dung</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="content" placeholder="Nhập nội dung (quy định không quá 250 ký tự)" rows="3"
-                                    cols="10">{{ old('content') }}</textarea>
-                            </div>
-                        </div>
+                        
                         <div class="form-group row align-items-center">
                             <label for="image" class="col-sm-2 col-form-label">Ảnh:</label>
 
@@ -68,7 +52,8 @@
 
                         <div class="form-group mb-0">
                             <div>
-                                <a href="{{ route('header.index') }}" class="btn btn-secondary waves-effect waves-light">
+                                <a href="{{ route('image_header.index') }}"
+                                    class="btn btn-secondary waves-effect waves-light">
                                     QUAY LẠI
                                 </a>
                                 <button type="submit" class="btn btn-primary waves-effect waves-light" id="submitSearch">

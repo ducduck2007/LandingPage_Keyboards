@@ -31,3 +31,21 @@ Route::group(['prefix' => 'header', 'middleware' => ['admin']], function () {
     Route::post('post-create', 'Admin\HeaderController@postCreate')->name('header.postCreate');
     Route::post('delete', 'Admin\HeaderController@delete')->name('header.delete');
 });
+
+Route::group(['prefix' => 'image_header', 'middleware' => ['admin']], function () {
+    Route::get('index', 'Admin\ImageheaderController@index')->name('image_header.index');
+    Route::get('update/{id}', 'Admin\ImageheaderController@update')->name('image_header.update');
+    Route::post('post-update', 'Admin\ImageheaderController@postUpdate')->name('image_header.postUpdate');
+    Route::get('create', 'Admin\ImageheaderController@create')->name('image_header.create');
+    Route::post('post-create', 'Admin\ImageheaderController@postCreate')->name('image_header.postCreate');
+    Route::post('delete', 'Admin\ImageheaderController@delete')->name('image_header.delete');
+});
+
+Route::group(['prefix' => 'bestSelling', 'middleware' => ['admin']], function () {
+    Route::get('index', 'Admin\BestsellingController@index')->name('bestSelling.index');
+    Route::get('update/{id}', 'Admin\BestsellingController@update')->name('bestSelling.update');
+    Route::post('post-update', 'Admin\BestsellingController@postUpdate')->name('bestSelling.postUpdate');
+    Route::get('create', 'Admin\BestsellingController@create')->name('bestSelling.create');
+    Route::post('post-create', 'Admin\BestsellingController@postCreate')->name('bestSelling.postCreate');
+    Route::post('delete', 'Admin\BestsellingController@delete')->name('bestSelling.delete');
+});
