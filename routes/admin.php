@@ -49,3 +49,21 @@ Route::group(['prefix' => 'bestSelling', 'middleware' => ['admin']], function ()
     Route::post('post-create', 'Admin\BestsellingController@postCreate')->name('bestSelling.postCreate');
     Route::post('delete', 'Admin\BestsellingController@delete')->name('bestSelling.delete');
 });
+
+Route::group(['prefix' => 'deal_sale', 'middleware' => ['admin']], function () {
+    Route::get('index', 'Admin\DealsaleController@index')->name('deal_sale.index');
+    Route::get('update/{id}', 'Admin\DealsaleController@update')->name('deal_sale.update');
+    Route::post('post-update', 'Admin\DealsaleController@postUpdate')->name('deal_sale.postUpdate');
+    Route::get('create', 'Admin\DealsaleController@create')->name('deal_sale.create');
+    Route::post('post-create', 'Admin\DealsaleController@postCreate')->name('deal_sale.postCreate');
+    Route::post('delete', 'Admin\DealsaleController@delete')->name('deal_sale.delete');
+});
+
+Route::group(['prefix' => 'featured_photo', 'middleware' => ['admin']], function () {
+    Route::get('index', 'Admin\FeaturedphotoController@index')->name('featured_photo.index');
+    Route::get('update/{id}', 'Admin\FeaturedphotoController@update')->name('featured_photo.update');
+    Route::post('post-update', 'Admin\FeaturedphotoController@postUpdate')->name('featured_photo.postUpdate');
+    Route::get('create', 'Admin\FeaturedphotoController@create')->name('featured_photo.create');
+    Route::post('post-create', 'Admin\FeaturedphotoController@postCreate')->name('featured_photo.postCreate');
+    Route::post('delete', 'Admin\FeaturedphotoController@delete')->name('featured_photo.delete');
+});

@@ -33,12 +33,20 @@
     <title>ĐOÀN THANH NIÊN VÌ HÒA BÌNH</title>
 </head>
 
-<body class="pb-4">
+<body>
 
     @include('client.sub.header')
     @include('client.sub.titleMenu')
     @include('client.sub.contentHeader')
     @include('client.sub.deal_sale')
+    @include('client.sub.phimCo')
+    @include('client.sub.phimVanPhong')
+    @include('client.sub.keycaps')
+    @include('client.sub.switch')
+    @include('client.sub.tk_view')
+    @include('client.sub.footer')
+
+    @include('client.sub.scrollTop')
 
     <script>
         function targetDealsale() {
@@ -46,7 +54,75 @@
                 behavior: "smooth"
             });
         }
+
+        function targetPhimCo() {
+            document.getElementById("scrollPhimCo").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+        function targetPhimVP() {
+            document.getElementById("scrollPhimVP").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+        function targetKeycaps() {
+            document.getElementById("scrollKeycaps").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+        function targetSwitch() {
+            document.getElementById("scrollSwitch").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
     </script>
+    <script>
+        $(document).ready(function() {
+            function initCarousel(selector, items, nextBtn, prevBtn) {
+                var owl = $(selector).owlCarousel({
+                    items: items,
+                    loop: true,
+                    margin: 10,
+                    nav: false,
+                    dots: false,
+                    autoplay: true,
+                    autoplayTimeout: 10000,
+                    autoplayHoverPause: true
+                });
+
+                $(nextBtn).click(function() {
+                    owl.trigger('next.owl.carousel');
+                });
+                $(prevBtn).click(function() {
+                    owl.trigger('prev.owl.carousel');
+                });
+            }
+
+            // Khởi tạo các carousel với các cấu hình khác nhau
+            initCarousel("#panel1-carousel", 5, "#nextBtn1", "#prevBtn1");
+            initCarousel("#panel2-carousel", 6, "#nextBtn3", "#prevBtn3");
+            initCarousel("#cardPhimCo", 7, "#nextBtn2", "#prevBtn2");
+            initCarousel("#panel3-carousel", 4, "#nextBtn2", "#prevBtn2");
+            initCarousel("#cardPhimVanPhong", 7, "#nextBtn5", "#prevBtn5");
+            initCarousel("#cardKeycaps", 7, "#nextBtn6", "#prevBtn6");
+            initCarousel("#cardSwitch", 6, "#nextBtnS", "#prevBtnS");
+        });
+
+        const titleElement = document.querySelector('.titleMargin');
+        let isScrolling;
+
+        window.addEventListener('scroll', () => {
+            titleElement.style.top = '0';
+            clearTimeout(isScrolling);
+            isScrolling = setTimeout(() => {
+                titleElement.style.top = '';
+            }, 250);
+        });
+    </script>
+
 </body>
 
 </html>

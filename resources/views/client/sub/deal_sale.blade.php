@@ -32,23 +32,35 @@
 
         <div id="tablepanel1">
             <div class="col-12 d-flex" style="position: relative;">
-                <div class="bg003 me-5 col-3"></div>
+                @foreach ($featured_photo as $fp)
+                    @if ($fp->vi_tri == 1)
+                        <div class="bg003 me-5 col-3" style="background-image: url('{{ $fp->image }}');"></div>
+                    @endif
+                @endforeach
+
                 <div class="custom-nav col-9">
-                    <button id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button id="prevBtn1"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button id="nextBtn1"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
-                <div class="owl-carousel owl-theme" style="overflow: hidden;">
+
+                <div class="owl-carousel owl-theme" id="panel1-carousel" style="overflow: hidden;">
                     @foreach ($deal_sale as $ds)
-                        <div class="card item" style="height: 400px; border-radius: 4px;">
-                            <img src="{{ $ds->image }}" class="card-img-top" alt="..."
-                                style="height: 50%; object-fit: cover;">
-                            <div class="card-body d-flex flex-column justify-content-between gap-2">
-                                <h5 class="card-title mb-0">{{ $ds->title }}</h5>
-                                <p class="card-text mb-0 t_over">{{ $ds->content }}
-                                </p>
-                                <a href="{{ $ds->link }}" class="btn btn-primary">Mua ngay</a>
+                        @if ($ds->vi_tri == 1)
+                            <div class="card item" style="height: 400px; border-radius: 4px;">
+                                <img src="{{ $ds->image }}" class="card-img-top" alt="..."
+                                    style="height: 50%; object-fit: cover;">
+                                <div class="card-body d-flex flex-column justify-content-between gap-2">
+                                    <h5 class="card-title mb-0">{{ $ds->title }}</h5>
+                                    <p class="card-text mb-0 t_over">{{ $ds->content }}</p>
+                                    <div class="scene">
+                                        <div class="cube">
+                                            <span class="side top">Mua ngay</span>
+                                            <span class="side front">{{ $ds->link }}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -56,18 +68,26 @@
 
         <div id="tablepanel2">
             <div class="col-12 d-flex" style="position: relative;">
-                <div class="owl-carousel owl-theme" style="overflow: hidden;">
+
+                <div class="custom-nav d-flex align-items-center justify-content-between col-12">
+                    <button id="prevBtn3"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button id="nextBtn3"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+
+                <div class="owl-carousel owl-theme" id="panel2-carousel" style="overflow: hidden;">
                     @foreach ($deal_sale as $ds)
-                        <div class="card item" style="height: 400px; border-radius: 4px;">
-                            <img src="{{ $ds->image }}" class="card-img-top" alt="..."
-                                style="height: 50%; object-fit: cover;">
-                            <div class="card-body d-flex flex-column justify-content-between gap-2">
-                                <h5 class="card-title mb-0">{{ $ds->title }}</h5>
-                                <p class="card-text mb-0 t_over">{{ $ds->content }}
-                                </p>
-                                <a href="{{ $ds->link }}" class="btn btn-primary">Mua ngay</a>
+                        @if ($ds->vi_tri == 2)
+                            <div class="card item" style="height: 400px; border-radius: 4px;">
+                                <img src="{{ $ds->image }}" class="card-img-top" alt="..."
+                                    style="height: 50%; object-fit: cover;">
+                                <div class="card-body d-flex flex-column justify-content-between gap-2">
+                                    <h5 class="card-title mb-0">{{ $ds->title }}</h5>
+                                    <p class="card-text mb-0 t_over">{{ $ds->content }}
+                                    </p>
+                                    <a href="{{ $ds->link }}" class="btn btn-primary">Mua ngay</a>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -75,21 +95,29 @@
 
         <div id="tablepanel3">
             <div class="col-12 d-flex" style="position: relative;">
-                <div class="bg003 me-5 col-3"></div>
-                <div class="owl-carousel owl-theme" style="overflow: hidden;">
+                @foreach ($featured_photo as $fp)
+                    @if ($fp->vi_tri == 2)
+                        <div class="bg003 me-5 col-4" style="background-image: url('{{ $fp->image }}');"></div>
+                    @endif
+                @endforeach
+
+                <div class="owl-carousel owl-theme" id="panel3-carousel" style="overflow: hidden;">
                     @foreach ($deal_sale as $ds)
-                        <div class="card item" style="height: 400px; border-radius: 4px;">
-                            <img src="{{ $ds->image }}" class="card-img-top" alt="..."
-                                style="height: 50%; object-fit: cover;">
-                            <div class="card-body d-flex flex-column justify-content-between gap-2">
-                                <h5 class="card-title mb-0">{{ $ds->title }}</h5>
-                                <p class="card-text mb-0 t_over">{{ $ds->content }}
-                                </p>
-                                <a href="{{ $ds->link }}" class="btn btn-primary">Mua ngay</a>
+                        @if ($ds->vi_tri == 3)
+                            <div class="card item" style="height: 400px; border-radius: 4px;">
+                                <img src="{{ $ds->image }}" class="card-img-top" alt="..."
+                                    style="height: 50%; object-fit: cover;">
+                                <div class="card-body d-flex flex-column justify-content-between gap-2">
+                                    <h5 class="card-title mb-0">{{ $ds->title }}</h5>
+                                    <p class="card-text mb-0 t_over">{{ $ds->content }}
+                                    </p>
+                                    <a href="{{ $ds->link }}" class="btn btn-primary">Mua ngay</a>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 </div>
+
             </div>
         </div>
     </div>
@@ -117,3 +145,65 @@
         });
     });
 </script>
+<style>
+    .bg003 {
+        height: 400px;
+        background-image: url('{{ $deal_sale[0]->image }}');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        border-radius: 4px;
+        transition: background-size 0.3s ease;
+    }
+
+    .bg003:hover {
+        background-size: 110% 110%;
+    }
+
+    .scene {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cube {
+        color: #ccc;
+        cursor: pointer;
+        font-family: 'Roboto', sans-serif;
+        transition: all 0.85s cubic-bezier(.17, .67, .14, .93);
+        transform-style: preserve-3d;
+        transform-origin: 100% 50%;
+        width: 100%;
+        height: 4em;
+    }
+
+    .cube:hover {
+        transform: rotateX(-90deg);
+    }
+
+    .side {
+        box-sizing: border-box;
+        position: absolute;
+        display: inline-block;
+        height: 4em;
+        width: 100%;
+        text-align: center;
+        text-transform: uppercase;
+        padding-top: 1.5em;
+        font-weight: bold;
+    }
+
+    .top {
+        background: wheat;
+        color: #222229;
+        transform: rotateX(90deg) translate3d(0, 0, 2em);
+        box-shadow: inset 0 0 0 5px #fff;
+    }
+
+    .front {
+        background: #222229;
+        color: #fff;
+        box-shadow: inset 0 0 0 5px #fff;
+        transform: translate3d(0, 0, 2em);
+    }
+</style>

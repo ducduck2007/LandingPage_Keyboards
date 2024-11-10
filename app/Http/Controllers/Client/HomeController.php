@@ -19,8 +19,9 @@ class HomeController extends Controller
         $header = DB::select("SELECT * FROM header");
         $image_header = DB::select("SELECT * FROM image_header");
         $best_selling = DB::select("SELECT * FROM best_selling");
+        $featured_photo = DB::select("SELECT * FROM featured_photo");
 
-        return view('client.home', compact('deal_sale', 'header', 'image_header', 'best_selling'));
+        return view('client.home', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo'));
     }    
 
     public function getDownload(Request $req)
