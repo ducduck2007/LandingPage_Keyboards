@@ -130,6 +130,66 @@
             </div>
         </div>
 
+        <div id="tablepanel2">
+            <div class="col-12 d-flex" style="position: relative;">
+
+                <div class="custom-nav d-flex align-items-center justify-content-between col-12">
+                    <button id="prevBtn3"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button id="nextBtn3"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+
+                <div class="owl-carousel owl-theme" id="panel2-carousel" style="overflow: hidden;">
+                    @foreach ($deal_sale as $ds)
+                        @if ($ds->vi_tri == 2)
+                            <div class="card item" style="height: 400px; border-radius: 4px;">
+                                <img src="{{ $ds->image }}" class="card-img-top" alt="..."
+                                    style="height: 50%; object-fit: cover;">
+                                <div class="card-body d-flex flex-column justify-content-between gap-2">
+                                    <h5 class="card-title mb-0" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalPanel"
+                                        onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->title }}</h5>
+                                    <p class="card-text mb-0 t_over">{{ $ds->content }}
+                                    </p>
+                                    <a href="{{ $ds->price }}" class="btn btn-primary">Mua ngay</a>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+
+            </div>
+        </div>
+
+        <div id="tablepanel3">
+            <div class="col-12 d-flex" style="position: relative;">
+                @foreach ($featured_photo as $fp)
+                    @if ($fp->vi_tri == 2)
+                        <div class="bg003 me-5 col-4" style="background-image: url('{{ $fp->image }}');"></div>
+                    @endif
+                @endforeach
+
+                <div class="owl-carousel owl-theme" id="panel3-carousel" style="overflow: hidden;">
+                    @foreach ($deal_sale as $ds)
+                        @if ($ds->vi_tri == 3)
+                            <div class="card item" style="height: 400px; border-radius: 4px;">
+                                <img src="{{ $ds->image }}" class="card-img-top" alt="..."
+                                    style="height: 50%; object-fit: cover;">
+                                <div class="card-body d-flex flex-column justify-content-between gap-2">
+                                    <h5 class="card-title mb-0" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalPanel"
+                                        onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->title }}</h5>
+                                    <p class="card-text mb-0 t_over">{{ $ds->content }}
+                                    </p>
+                                    <a href="{{ $ds->price }}" class="btn btn-primary">Mua ngay</a>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+
+            </div>
+        </div>
+
         <!-- Modal chung cho các sản phẩm -->
         <div class="modal fade" id="exampleModalPanel" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -137,7 +197,8 @@
                 <div class="modal-content">
                     <div class="modal-header container">
                         <h1 class="modal-title fs-5" id="modalTitle1"></h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body container d-flex">
                         <div class="aside col-4">
@@ -204,66 +265,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div id="tablepanel2">
-            <div class="col-12 d-flex" style="position: relative;">
-
-                <div class="custom-nav d-flex align-items-center justify-content-between col-12">
-                    <button id="prevBtn3"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button id="nextBtn3"><i class="fa-solid fa-chevron-right"></i></button>
-                </div>
-
-                <div class="owl-carousel owl-theme" id="panel2-carousel" style="overflow: hidden;">
-                    @foreach ($deal_sale as $ds)
-                        @if ($ds->vi_tri == 2)
-                            <div class="card item" style="height: 400px; border-radius: 4px;">
-                                <img src="{{ $ds->image }}" class="card-img-top" alt="..."
-                                    style="height: 50%; object-fit: cover;">
-                                <div class="card-body d-flex flex-column justify-content-between gap-2">
-                                    <h5 class="card-title mb-0" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalPanel"
-                                        onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->title }}</h5>
-                                    <p class="card-text mb-0 t_over">{{ $ds->content }}
-                                    </p>
-                                    <a href="{{ $ds->price }}" class="btn btn-primary">Mua ngay</a>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-
-            </div>
-        </div>
-
-        <div id="tablepanel3">
-            <div class="col-12 d-flex" style="position: relative;">
-                @foreach ($featured_photo as $fp)
-                    @if ($fp->vi_tri == 2)
-                        <div class="bg003 me-5 col-4" style="background-image: url('{{ $fp->image }}');"></div>
-                    @endif
-                @endforeach
-
-                <div class="owl-carousel owl-theme" id="panel3-carousel" style="overflow: hidden;">
-                    @foreach ($deal_sale as $ds)
-                        @if ($ds->vi_tri == 3)
-                            <div class="card item" style="height: 400px; border-radius: 4px;">
-                                <img src="{{ $ds->image }}" class="card-img-top" alt="..."
-                                    style="height: 50%; object-fit: cover;">
-                                <div class="card-body d-flex flex-column justify-content-between gap-2">
-                                    <h5 class="card-title mb-0" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalPanel"
-                                        onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->title }}</h5>
-                                    <p class="card-text mb-0 t_over">{{ $ds->content }}
-                                    </p>
-                                    <a href="{{ $ds->price }}" class="btn btn-primary">Mua ngay</a>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
-                </div>
-
             </div>
         </div>
     </div>

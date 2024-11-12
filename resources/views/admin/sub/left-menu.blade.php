@@ -43,9 +43,8 @@
         </li>
 
         <li class="menu-title">NGƯỜI DÙNG</li>
-        <li @if ($routeName == 'view-change-pass') class='mm-active' @endif><a href="{{ route('view-change-pass') }}"
-                class="waves-effect"><i class="dripicons-power"></i><span>Đổi mật khẩu</span></a></li>
-        <li><a href="{{ route('Logout') }}" class="waves-effect"><i class="dripicons-power"></i><span>Logout</span></a>
+        <li><a href="{{ route('client.home') }}" class="waves-effect"><i
+                    class="dripicons-power"></i><span>Thoát</span></a>
         </li>
 
     </ul>

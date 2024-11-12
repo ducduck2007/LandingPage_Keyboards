@@ -16,12 +16,14 @@
                             <img src="{{ $ds->image }}" class="card-img-top" alt="..."
                                 style="height: 50%; object-fit: cover;">
                             <div class="card-body d-flex flex-column justify-content-between gap-2">
-                                <h5 class="card-title mb-0">{{ $ds->title }}</h5>
+                                <h5 class="card-title mb-0" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalCardPhim">
+                                    {{ $ds->title }}</h5>
                                 <p class="card-text mb-0 t_over">{{ $ds->content }}</p>
                                 <div class="scene">
                                     <div class="cube">
                                         <span class="side top">Mua ngay</span>
-                                        <span class="side front">{{ $ds->price }}₫</span>
+                                        <span class="side front">{{ $ds->price }}</span>
                                     </div>
                                 </div>
                             </div>
