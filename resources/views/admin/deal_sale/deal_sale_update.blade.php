@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label class="col-form-label">Link</label>
+                                    <label class="col-form-label">Giá sản phẩm</label>
                                     <input class="form-control" type="text" name="link" required
                                         placeholder="Nhập link" value="{{ old('link', $model->link) }}">
                                 </div>
@@ -48,11 +48,21 @@
                                     <label class="col-form-label">Vị trí</label>
                                     <select class="form-control" name="vi_tri" required>
                                         <option value="1" {{ old('vi_tri', $model->vi_tri) == 1 ? 'selected' : '' }}>
-                                            Bàn phím cơ</option>
+                                            Panel bàn phím cơ</option>
                                         <option value="2" {{ old('vi_tri', $model->vi_tri) == 2 ? 'selected' : '' }}>
-                                            Bàn phím văn phòng</option>
+                                            Panel bàn phím văn
+                                            phòng</option>
                                         <option value="3" {{ old('vi_tri', $model->vi_tri) == 3 ? 'selected' : '' }}>
-                                            Keycaps</option>
+                                            Panel keycaps</option>
+                                        <option value="4" {{ old('vi_tri', $model->vi_tri) == 4 ? 'selected' : '' }}>
+                                            Bảng bàn phím cơ</option>
+                                        <option value="5" {{ old('vi_tri', $model->vi_tri) == 5 ? 'selected' : '' }}>
+                                            Bảng bàn phím văn
+                                            phòng</option>
+                                        <option value="6" {{ old('vi_tri', $model->vi_tri) == 6 ? 'selected' : '' }}>
+                                            Bảng keycaps</option>
+                                        <option value="7" {{ old('vi_tri', $model->vi_tri) == 7 ? 'selected' : '' }}>
+                                            Bảng switch</option>
                                     </select>
                                 </div>
                             </div>

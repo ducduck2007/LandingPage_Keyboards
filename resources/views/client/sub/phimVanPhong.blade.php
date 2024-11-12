@@ -11,7 +11,7 @@
 
             <div class="owl-carousel owl-theme" id="cardPhimVanPhong" style="overflow: hidden;">
                 @foreach ($deal_sale as $ds)
-                    @if ($ds->vi_tri == 1)
+                    @if ($ds->vi_tri == 5)
                         <div class="card item" style="height: 400px; border-radius: 4px;">
                             <img src="{{ $ds->image }}" class="card-img-top" alt="..."
                                 style="height: 50%; object-fit: cover;">
@@ -21,7 +21,7 @@
                                 <div class="scene">
                                     <div class="cube">
                                         <span class="side top">Mua ngay</span>
-                                        <span class="side front">{{ $ds->link }}</span>
+                                        <span class="side front">{{ $ds->link }}₫</span>
                                     </div>
                                 </div>
                             </div>

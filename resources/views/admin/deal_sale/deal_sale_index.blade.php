@@ -12,7 +12,7 @@
         <div class="row align-items-center ">
             <div class="col-md-8">
                 <div class="page-title-box">
-                    <h4 class="page-title">TABLE DEAL SALE</h4>
+                    <h4 class="page-title">TABLE SẢN PHẨM</h4>
                     @if ($errors->any())
                         <span style="color:red">{{ $errors->first() }}</span>
                     @endif
@@ -40,7 +40,7 @@
                 <div class="card-body">
 
                     @isset($data)
-                        <p>Danh sách sản phẩm sale</p>
+                        <p>Danh sách sản phẩm</p>
                         <div class="table-responsive">
                             <input type="hidden" id="token" value="{{ csrf_token() }}">
 
@@ -52,7 +52,7 @@
                                     <th>Image</th>
                                     <th>Tiêu đề</th>
                                     <th>Nội dung</th>
-                                    <th>Link</th>
+                                    <th>Giá sản phẩm</th>
                                     <th>Vị trí phần</th>
                                     <th>Hành động</th>
                                 </thead>
@@ -64,14 +64,22 @@
                                             <td><img style="width: 100px;"src={{ asset($d->image) }} alt=""></td>
                                             <td>{{ $d->title }}</td>
                                             <td>{!! $d->content !!}</td>
-                                            <td>{{ $d->link }}</td>
+                                            <td>{{ $d->link }}₫</td>
                                             <td>
                                                 @if ($d->vi_tri == 1)
-                                                    Bàn phím cơ
+                                                    Panel bàn phím cơ
                                                 @elseif ($d->vi_tri == 2)
-                                                    Bàn phím văn phòng
+                                                    Panel bàn phím văn phòng
                                                 @elseif ($d->vi_tri == 3)
-                                                    Keycaps
+                                                    Panel keycaps
+                                                @elseif ($d->vi_tri == 4)
+                                                    Bảng bàn phím cơ
+                                                @elseif ($d->vi_tri == 5)
+                                                    Bảng bàn phím văn phòng
+                                                @elseif ($d->vi_tri == 6)
+                                                    Bảng keycaps
+                                                @elseif ($d->vi_tri == 7)
+                                                    Bảng switch
                                                 @endif
                                             </td>
                                             <td>

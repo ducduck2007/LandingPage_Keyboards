@@ -66,7 +66,7 @@
                         <div class="fs-6">{{ $bs->name_product }}</div>
                         <div class="text-danger">{{ $bs->product_price }}₫</div>
                     </div>
-                    <div class="lower-part-back">
+                    <div class="lower-part-back" style="position: relative;">
                         <div class="loader">
                             <svg class="loader-svg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 47.94 47.94"
@@ -79,9 +79,10 @@
          C22.602,0.567,25.338,0.567,26.285,2.486z"></path>
                             </svg>
                         </div>
-                        <span class="ms-2">{{ $bs->sales }}</span>
+                        <span class="ms-2 d-flex flex-column">{{ $bs->sales }}
+                            <a href="#" class="btn-xemThem">Xem thêm</a>
+                        </span>
                     </div>
-
                 </div>
             </div>
         @endforeach

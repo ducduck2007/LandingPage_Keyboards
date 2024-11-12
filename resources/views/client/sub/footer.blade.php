@@ -1,5 +1,5 @@
-<div class="bg-light">
-    <div class="container-fluid col-11 mt-4 pb-4">
+<div class="bg-light" style="height: 400px">
+    <div class="container-fluid col-11 mt-4">
         <div class="col-12 pt-5 pb-4">
             <div class="row row-cols-4">
                 <div class="col">
@@ -28,9 +28,19 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <hr style="border: 3px solid #000">
+        </div>
+        <div class="col-12">
+            icons
+        </div>
     </div>
 </div>
 <style>
+    .mucNho {
+        line-height: 25px;
+    }
+
     .mucNho:hover {
         text-decoration: underline;
         color: #1479EA;

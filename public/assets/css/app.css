@@ -421,3 +421,17 @@ header {
         background-position: -100%;
     }
 }
+
+.btn-xemThem {
+    font-weight: 500;
+    font-size: 14px;
+    color: #ED8A19;
+    text-decoration: none;
+}
+
+.btn-xemThem:hover {
+    font-weight: 500;
+    font-size: 14px;
+    color: #e7973b;
+    text-decoration: underline;
+}
