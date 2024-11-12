@@ -46,6 +46,7 @@
     @include('client.sub.tk_view')
     @include('client.sub.footer')
 
+    @include('client.sub.modal')
     @include('client.sub.scrollTop')
 
     <script>

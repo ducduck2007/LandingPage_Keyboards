@@ -59,7 +59,7 @@
         position: fixed;
         bottom: -22px;
         right: -54px;
-        z-index: 9999;
+        z-index: 1000;
         scale: 0.4;
         cursor: pointer;
     }

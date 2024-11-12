@@ -23,7 +23,7 @@
                                 <div class="scene">
                                     <div class="cube">
                                         <span class="side top">Mua ngay</span>
-                                        <span class="side front">{{ $ds->link }}₫</span>
+                                        <span class="side front">{{ $ds->price }}₫</span>
                                     </div>
                                 </div>
                             </div>

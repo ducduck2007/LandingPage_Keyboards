@@ -53,6 +53,8 @@
                                     <th>Tiêu đề</th>
                                     <th>Nội dung</th>
                                     <th>Giá sản phẩm</th>
+                                    <th>Thông số kỹ thuật</th>
+                                    <th>Giá sản phẩm</th>
                                     <th>Vị trí phần</th>
                                     <th>Hành động</th>
                                 </thead>
@@ -64,6 +66,8 @@
                                             <td><img style="width: 100px;"src={{ asset($d->image) }} alt=""></td>
                                             <td>{{ $d->title }}</td>
                                             <td>{!! $d->content !!}</td>
+                                            <td>{{ $d->price }}</td>
+                                            <td style="text-align: unset">{!! $d->specifications !!}</td>
                                             <td>{{ $d->link }}₫</td>
                                             <td>
                                                 @if ($d->vi_tri == 1)

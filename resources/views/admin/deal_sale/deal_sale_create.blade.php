@@ -39,8 +39,8 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     <label class="col-form-label">Giá sản phẩm</label>
-                                    <input class="form-control" type="text" name="link" placeholder="Nhập link"
-                                        value="{{ old('link') }}">
+                                    <input class="form-control" type="text" name="price"
+                                        placeholder="Nhập giá sản phẩm" value="{{ old('price') }}">
                                 </div>
                             </div>
 
@@ -75,6 +75,15 @@
                                     cols="10">{{ old('content') }}</textarea>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Thông số kỹ thuật</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="editor" name="specifications" required placeholder="Nhập thông số kỹ thuật"
+                                    rows="3" cols="10">{!! old('specifications') !!}</textarea>
+                            </div>
+                        </div>
+
                         <div class="form-group row align-items-center">
                             <label for="image" class="col-sm-2 col-form-label">Ảnh:</label>
 
@@ -124,5 +133,14 @@
                     $('#example_Image').attr('src', tmppath);
                 });
             })
+        </script>
+        <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
+        <script>
+            CKEDITOR.replace('editor', {
+
+                filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+                filebrowserUploadMethod: 'form'
+            });
+            CKEDITOR.config.height = 400;
         </script>
     @endsection

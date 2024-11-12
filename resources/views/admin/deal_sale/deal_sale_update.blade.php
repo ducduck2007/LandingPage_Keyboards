@@ -39,8 +39,8 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     <label class="col-form-label">Giá sản phẩm</label>
-                                    <input class="form-control" type="text" name="link" required
-                                        placeholder="Nhập link" value="{{ old('link', $model->link) }}">
+                                    <input class="form-control" type="text" name="price" required
+                                        placeholder="Nhập price" value="{{ old('price', $model->price) }}">
                                 </div>
                             </div>
                             <div class="col-4">
@@ -72,6 +72,14 @@
                             <label class="col-sm-2 col-form-label">Nội dung</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="content" placeholder="Nội dung" rows="3" cols="10">{{ old('content', $model->content) }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Thông số kỹ thuật</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="editor" name="specifications" required placeholder="Nhập thông số kỹ thuật"
+                                    rows="3" cols="10">{{ old('specifications', $model->specifications) }}</textarea>
                             </div>
                         </div>
 
@@ -120,7 +128,14 @@
 @section('js')
     <script src="{{ asset('assets/plugins/select2-4.1.0/dist/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('editor', {
 
+            filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+            filebrowserUploadMethod: 'form'
+        });
+        CKEDITOR.config.height = 500;
+    </script>
     <script>
         $(document).ready(function() {
             $('#image').change(function(event) {
