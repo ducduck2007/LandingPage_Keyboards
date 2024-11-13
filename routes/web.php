@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\Client\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +15,5 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', 'Client\HomeController@index')->name('client.home');
-Route::get('/su-kien', 'Client\EventsController@index')->name('client.events');
-Route::get('/game-play', 'Client\GameplayController@index')->name('client.gameplay');
-Route::get('/tin-tuc/{slug}', 'Client\NewsController@newsDetail')->name('client.news_detail');
-Route::get('/lich-mo-server', 'Client\CalenderController@index')->name('client.calender');
-
-Route::get('{slug}', 'Client\SearchController@index')->name('client.search_detail');
-Route::post('/get-download', 'Client\HomeController@getDownload')->name('getDownload');
-Route::post('/connect-to-gamemini', 'Client\HomeController@connectToGameMini')->name('connectToGameMini');
+Route::post('/register', 'Client\HomeController@register')->name('client.register');
+Route::post('/login', 'Client\HomeController@login')->name('client.login');

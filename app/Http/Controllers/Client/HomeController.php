@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Game;
-use App\Events;
-use App\News;
 use DB;
-use App\Http\Controllers\Admin\FunctionController;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use App\Models\DataUser;
 
 class HomeController extends Controller
 {
@@ -24,40 +22,40 @@ class HomeController extends Controller
         return view('client.home', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo'));
     }    
 
-    public function getDownload(Request $req)
+    // Phương thức xử lý đăng ký
+    public function register(Request $request)
     {
-        // try{
-            $input = $req->only(['val','val_game']);
-            // 0: android, 1:ios, 2:pc
-            // 
-            $id_game=(int)$req->val_game;
-            $type=(int)$req->val;
-          
-    // type_join_tabletinyint(2) NULL1:game,2:tin tức, 3:event
-            $fun= new FunctionController();
-            $fun->countDonwload($id_game,1,$type);
-            
-            return response()->json(true);
-        // }catch (\Exception $e) {
-          
-        //     return response()->json(true);
-        // }
+        // Kiểm tra dữ liệu đầu vào
+        $validator = Validator::make($request->all(), [
+            'user_name' => 'required|unique:data_users,user_name',
+            'email' => 'required|email|unique:data_users,email',
+            'password' => 'required|min:6',
+        ]);
+
+        // Nếu có lỗi, trả về lỗi
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'message' => 'Tên đăng nhập hoặc email đã tồn tại'], 400);
+        }
+
+        // Thêm người dùng vào DB
+        DataUser::create([
+            'user_name' => $request->user_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password), // Mã hóa mật khẩu
+        ]);
+
+        return response()->json(['success' => true, 'message' => 'Chuyển đến phần đăng nhập']);
     }
 
-    public function connectToGameMini(Request $req){
-        $walletAddress = $req->walletAddress;
+    // Phương thức xử lý đăng nhập
+    public function login(Request $request)
+    {
+        $user = DataUser::where('email', $request->email)->first();
 
-        // $key = "UDM74D9gZKg2sda1";
+        if ($user && Hash::check($request->password, $user->password)) {
+            return response()->json(['success' => true]);
+        }
 
-        $key = config('app.key_link_game_tele');
-        $linkGameTele = config('app.link_game_tele');
-
-        // $encrypted = openssl_encrypt($walletAddress, 'aes-128-ecb', $key, 0);
-
-        $linkGameMini = $linkGameTele."/start?startapp=walletlink_". $walletAddress;
-
-        return response()->json($linkGameMini);
+        return response()->json(['success' => false, 'message' => 'Email hoặc mật khẩu không chính xác'], 401);
     }
 }
-
-
