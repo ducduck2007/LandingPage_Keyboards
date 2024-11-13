@@ -48,20 +48,23 @@
                                 <div class="form-group">
                                     <label class="col-form-label">Vị trí</label>
                                     <select class="form-control" name="vi_tri" required>
-                                        <option value="1" {{ old('vi_tri') == 1 ? 'selected' : '' }}>Panel bàn phím cơ
+                                        <option value="1" {{ old('vi_tri') == 1 ? 'selected' : '' }}>DEAL SALE - Bàn
+                                            phím cơ
                                         </option>
-                                        <option value="2" {{ old('vi_tri') == 2 ? 'selected' : '' }}>Panel bàn phím văn
+                                        <option value="2" {{ old('vi_tri') == 2 ? 'selected' : '' }}>DEAL SALE - Bàn
+                                            phím văn phòng
+                                        </option>
+                                        <option value="3" {{ old('vi_tri') == 3 ? 'selected' : '' }}>DEAL SALE -
+                                            Keycaps
+                                        </option>
+                                        <option value="4" {{ old('vi_tri') == 4 ? 'selected' : '' }}>Các loại phím cơ
+                                        </option>
+                                        <option value="5" {{ old('vi_tri') == 5 ? 'selected' : '' }}>Các loại phím văn
                                             phòng
                                         </option>
-                                        <option value="3" {{ old('vi_tri') == 3 ? 'selected' : '' }}>Panel keycaps
+                                        <option value="6" {{ old('vi_tri') == 6 ? 'selected' : '' }}>Các loại keycaps
                                         </option>
-                                        <option value="4" {{ old('vi_tri') == 4 ? 'selected' : '' }}>Bảng bàn phím cơ
-                                        </option>
-                                        <option value="5" {{ old('vi_tri') == 5 ? 'selected' : '' }}>Bảng bàn phím văn
-                                            phòng</option>
-                                        <option value="6" {{ old('vi_tri') == 6 ? 'selected' : '' }}>Bảng keycaps
-                                        </option>
-                                        <option value="7" {{ old('vi_tri') == 7 ? 'selected' : '' }}>Bảng switch
+                                        <option value="7" {{ old('vi_tri') == 7 ? 'selected' : '' }}>Các loại switch
                                         </option>
                                     </select>
                                 </div>

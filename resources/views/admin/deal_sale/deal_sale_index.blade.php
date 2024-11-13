@@ -71,19 +71,19 @@
                                             <td>{{ $d->link }}₫</td>
                                             <td>
                                                 @if ($d->vi_tri == 1)
-                                                    Panel bàn phím cơ
+                                                    DEAL SALE - Bàn phím cơ
                                                 @elseif ($d->vi_tri == 2)
-                                                    Panel bàn phím văn phòng
+                                                    DEAL SALE - Bàn phím văn phòng
                                                 @elseif ($d->vi_tri == 3)
-                                                    Panel keycaps
+                                                    DEAL SALE - Keycaps
                                                 @elseif ($d->vi_tri == 4)
-                                                    Bảng bàn phím cơ
+                                                    Các loại phím cơ
                                                 @elseif ($d->vi_tri == 5)
-                                                    Bảng bàn phím văn phòng
+                                                    Các loại phím văn phòng
                                                 @elseif ($d->vi_tri == 6)
-                                                    Bảng keycaps
+                                                    Các loại keycaps
                                                 @elseif ($d->vi_tri == 7)
-                                                    Bảng switch
+                                                    Các loại switch
                                                 @endif
                                             </td>
                                             <td>
