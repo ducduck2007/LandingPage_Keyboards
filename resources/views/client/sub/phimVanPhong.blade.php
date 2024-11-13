@@ -24,8 +24,10 @@
                                 <p class="card-text mb-0 t_over">{{ $ds->content }}</p>
                                 <div class="scene">
                                     <div class="cube">
-                                        <span class="side top">Mua ngay</span>
-                                        <span class="side front">{{ $ds->price }}</span>
+                                        <span class="side top" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalPanel"
+                                            onclick="updateModalContent({{ json_encode($ds) }})">Mua ngay</span> <span
+                                            class="side front">{{ $ds->price }}</span>
                                     </div>
                                 </div>
                             </div>
