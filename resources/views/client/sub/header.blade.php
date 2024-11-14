@@ -1,4 +1,4 @@
-<header>
+<header id="headerScroll">
     <nav class="container container_nav d-flex align-items-center justify-content-between">
         <div class="left_nav d-flex align-items-center">
             <div class="logo d-flex align-items-center gap-2">
@@ -36,7 +36,7 @@
                 <a href="#" class="text-light textNav">Giỏ <br>hàng</a>
             </li>
 
-            <button class="buttonNav">Đăng nhập</button>
+            {{-- <button class="buttonNav">Đăng nhập</button> --}}
         </ul>
     </nav>
 </header>

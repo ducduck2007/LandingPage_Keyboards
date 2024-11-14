@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @media (width < 1280px) {
     body {
@@ -28,7 +28,7 @@ body {
 header {
     background: #2c2425;
     position: fixed;
-    top: 0;
+    top: 56px;
     left: 0;
     width: 100%;
     z-index: 999;
@@ -36,11 +36,11 @@ header {
 
 .titleMargin {
     position: fixed;
-    top: 95px;
+    top: 151px;
     width: 100%;
     left: 0;
     z-index: 998;
-    transition: top .3s;
+    transition: top 0.3s;
 }
 
 .logo img {
@@ -74,7 +74,7 @@ header {
 }
 
 .ui-input:focus {
-    border-color: #149CEA;
+    border-color: #149cea;
 }
 
 .ui-input-underline {
@@ -83,12 +83,12 @@ header {
     left: 0;
     height: 2px;
     width: 100%;
-    background-color: #149CEA;
+    background-color: #149cea;
     transform: scaleX(0);
     transition: transform 0.3s;
 }
 
-.ui-input:focus+.ui-input-underline {
+.ui-input:focus + .ui-input-underline {
     transform: scaleX(1);
 }
 
@@ -102,7 +102,7 @@ header {
     transition: width 0.3s;
 }
 
-.ui-input:focus~.ui-input-highlight {
+.ui-input:focus ~ .ui-input-highlight {
     width: 100%;
 }
 
@@ -115,8 +115,8 @@ header {
     transition: color 0.3s;
 }
 
-.ui-input:focus~.ui-input-icon {
-    color: #149CEA;
+.ui-input:focus ~ .ui-input-icon {
+    color: #149cea;
 }
 
 .ui-input-icon svg {
@@ -140,7 +140,7 @@ header {
 
 .textNav:hover {
     color: #e0e0eb !important;
-    transition: .3s ease;
+    transition: 0.3s ease;
     text-decoration: underline;
 }
 
@@ -148,7 +148,7 @@ header {
     width: 10em;
     position: relative;
     height: 3.5em;
-    border: 3px ridge #149CEA;
+    border: 3px ridge #149cea;
     outline: none;
     background-color: transparent;
     color: white;
@@ -185,11 +185,11 @@ header {
 
 .buttonNav:hover::before,
 .buttonNav:hover::after {
-    transform: scale(0)
+    transform: scale(0);
 }
 
 .buttonNav:hover {
-    box-shadow: inset 0px 0px 25px #1479EA;
+    box-shadow: inset 0px 0px 25px #1479ea;
 }
 
 .heading {
@@ -204,8 +204,8 @@ header {
 
 .menu_heading li:hover,
 .menu_heading li:hover .text-dark {
-    color: #1479EA !important;
-    transition: .3s ease;
+    color: #1479ea !important;
+    transition: 0.3s ease;
 }
 
 .imgCarousel {
@@ -314,7 +314,6 @@ header {
     background-color: red;
 }
 
-
 #nextBtn1 {
     float: right;
     margin-right: -20px;
@@ -391,7 +390,7 @@ header {
     text-decoration: underline;
     cursor: pointer;
     transition: all 0.2s ease;
-    color: #1479EA;
+    color: #1479ea;
 }
 
 .btn-shine {
@@ -425,7 +424,7 @@ header {
 .btn-xemThem {
     font-weight: 500;
     font-size: 14px;
-    color: #ED8A19;
+    color: #ed8a19;
     text-decoration: none;
 }
 

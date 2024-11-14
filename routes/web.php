@@ -14,6 +14,9 @@ use App\Http\Controllers\Client\HomeController;
 |
 */
 
-Route::get('/', 'Client\HomeController@index')->name('client.home');
-Route::post('/register', 'Client\HomeController@register')->name('client.register');
-Route::post('/login', 'Client\HomeController@login')->name('client.login');
+// Route::get('/', 'Client\HomeController@index')->name('client.home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
