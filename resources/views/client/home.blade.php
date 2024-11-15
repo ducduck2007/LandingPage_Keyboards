@@ -49,8 +49,6 @@
     @include('client.sub.modal')
     @include('client.sub.scrollTop')
 
-    @include('client.loginSub')
-
     <script>
         function targetDealsale() {
             document.getElementById("scrollDealsale").scrollIntoView({
