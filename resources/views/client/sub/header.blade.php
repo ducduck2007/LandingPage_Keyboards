@@ -36,7 +36,34 @@
                 <a href="#" class="text-light textNav">Giỏ <br>hàng</a>
             </li>
 
-            <button class="buttonNav">Đăng nhập</button>
+            <div class="btn-group">
+                @if (Auth::check() && Auth::user()->role == 'user')
+                    <!-- Kiểm tra nếu người dùng đã đăng nhập và có role là 'user' -->
+                    <button type="button" class="btn btn-danger">{{ Auth::user()->name }}</button>
+                    <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <!-- Dropdown menu với button đăng xuất -->
+                    <ul class="dropdown-menu">
+                        <!-- Sử dụng form POST để đăng xuất -->
+                        <form action="{{ route('client.logout') }}" method="POST">
+                            @csrf <!-- Thêm token CSRF để bảo vệ form -->
+                            <li><button type="submit" class="dropdown-item">Đăng xuất</button></li>
+                        </form>
+                    </ul>
+                @else
+                    <a href="{{ route('client.login') }}" type="button" class="btn btn-danger">Đăng nhập</a>
+                    <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('client.register') }}">Đăng ký</a></li>
+                    </ul>
+                @endif
+            </div>
+
         </ul>
     </nav>
 </header>

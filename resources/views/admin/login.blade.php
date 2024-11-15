@@ -31,8 +31,8 @@
                                 @csrf
                                 <div class="form-group">
                                     <div class="col-12">
-                                        <label for="username">Têm đăng nhập</label>
-                                        <input class="form-control" placeholder="User Name" name="username"
+                                        <label for="name">Têm đăng nhập</label>
+                                        <input class="form-control" placeholder="User Name" name="name"
                                             type="text" required autofocus>
                                     </div>
                                 </div>

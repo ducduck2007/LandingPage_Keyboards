@@ -4,94 +4,85 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Redirect;
-use App\User;
+use App\User; // Đảm bảo namespace này đúng
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Admin\ListFunctionAPIController;
-
 
 class LoginController extends Controller
 {
     public function index()
     {
-         # code...
          return view('admin.login');
     }
    
     public function postLogin(Request $req)
     {
-    
-        # code...
         $this->validate($req,
             [
-                'username' => 'required',
+                'name' => 'required',   // Sửa từ 'username' thành 'name'
                 'password' => 'required'
             ],
             [
-                'username.required' => 'User cannot be empty !',
-                'password.required' => 'password cannot be empty !',
-                
+                'name.required' => 'Tên đăng nhập không được để trống!',
+                'password.required' => 'Mật khẩu không được để trống!',
             ]
-
         );
+
+        // Thay 'username' thành 'name' và thêm điều kiện 'role' => 'admin'
         $login = [
-            'username' => $req->username,
+            'name' => $req->name,
             'password' => $req->password,
-            'status' =>1
+            'role' => 'admin',  // Chỉ cho phép đăng nhập nếu role là admin
+            'status' => 1       // Kiểm tra trạng thái (nếu có)
         ];
+
         if(Auth::attempt($login)){
-            try{
+            try {
                 return redirect()->route('admin.home');
-            }catch (\Exception $e) {
+            } catch (\Exception $e) {
                 return Redirect::back()->withErrors('Lỗi server');
             }
-         
-        }else{
-            // dd(1);
-            return Redirect::back()->withErrors('Sai tài khoản hoặc mật khẩu !');
-            
+        } else {
+            return Redirect::back()->withErrors('Sai tài khoản hoặc mật khẩu!');
         }
-     
     }
 
     public function logOut()
     {
-        # code...
         Auth::logout();
         return redirect()->route('homeLogin');
     }
-    public function UpdatePass(Request $request) {
-      
-            // dd($request);
+
+    public function UpdatePass(Request $request) 
+    {
         $this->validate($request, [
             'passOld'=> 'required',
-            'passNew'=> 'required|required|min:8|max:20|regex:/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[#?!@$%^&*-]).{8,20}$/',
+            'passNew'=> 'required|min:8|max:20|regex:/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[#?!@$%^&*-]).{8,20}$/',
             'repassNew'=> 'required|same:passNew',
             ], 
             [
-            'passOld.required' => 'Vui lòng nhập mật khẩu',
-            'passNew.required' => 'Vui lòng nhập mật khẩu',
-            'repassNew.required' => 'Vui lòng nhập mật khẩu',
-            'repassNew.same' => 'Mật khẩu không trùng khớp',
-            'passNew.regex' => 'Mật khẩu mới dài ít nhất 8 ký tự, phải bao gồm chữ hoa, chữ thường và ký tự đăc biệt (!@#$%^&+=)',
-            'passNew.min' => 'Mật khẩu mới lớn hơn 8 ký tự',
-            'passNew.max' => 'Mật khẩu mới nhỏ hơn 20 ký tự',
+            'passOld.required' => 'Vui lòng nhập mật khẩu cũ',
+            'passNew.required' => 'Vui lòng nhập mật khẩu mới',
+            'repassNew.required' => 'Vui lòng nhập lại mật khẩu mới',
+            'repassNew.same' => 'Mật khẩu mới không trùng khớp',
+            'passNew.regex' => 'Mật khẩu mới phải gồm chữ hoa, chữ thường và ký tự đặc biệt (!@#$%^&+=)',
+            'passNew.min' => 'Mật khẩu mới phải lớn hơn 8 ký tự',
+            'passNew.max' => 'Mật khẩu mới phải nhỏ hơn 20 ký tự',
         ]);
-        $model = User::find(Auth::user()->id);
-        $Info=new ListFunctionAPIController();
-            // dd(1);
-        $data=$Info->changePassword($request->passOld,$request->passNew);
-        
-        if($data->final_status==200){
-            return Redirect::back()->withErrors($data->vi_message); 
-         }else{
 
+        $model = User::find(Auth::user()->id);
+        $Info = new ListFunctionAPIController();
+        $data = $Info->changePassword($request->passOld, $request->passNew);
+        
+        if ($data->final_status == 200) {
+            return Redirect::back()->withErrors($data->vi_message); 
+        } else {
             return Redirect::back()->withErrors($data->vi_message);
-            
         }
     }
+
     public function ViewChangePass()
     {
         return view('admin.view-change-pass');

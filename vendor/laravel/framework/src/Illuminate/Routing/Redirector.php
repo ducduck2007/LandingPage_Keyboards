@@ -43,7 +43,7 @@ class Redirector
      */
     public function home($status = 302)
     {
-        return $this->to($this->generator->route('client.home'), $status);
+        return $this->to($this->generator->route('home'), $status);
     }
 
     /**
