@@ -18,10 +18,9 @@ class HomeController extends Controller
         $image_header = DB::select("SELECT * FROM image_header");
         $best_selling = DB::select("SELECT * FROM best_selling");
         $featured_photo = DB::select("SELECT * FROM featured_photo");
+        $products = DB::select("SELECT * FROM products");
 
-        return view('client.home'
-        , compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo')
-    );
+        return view('client.home', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo', 'products'));
     }    
 
 }

@@ -22,4 +22,4 @@ use Illuminate\Support\Facades\Route;
 // Route::post('/forTelegram', 'API\GameMiniController@forTelegram')->name('gameMini.forTelegram');
 
 Route::get('/withTelegram/{any}', 'API\GameMiniController@forTelegram')->where('any', '.*')->name('gameMini.forTelegram');
-
+Route::get('/api/search', 'API\SreachController@search')->name('api.search');

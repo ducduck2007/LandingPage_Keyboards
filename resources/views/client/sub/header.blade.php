@@ -7,7 +7,13 @@
                 </div>
             </div>
             <div class="ui-input-container ms-3">
-                <input required="" placeholder="Tìm kiếm ở đây" class="ui-input" type="text" />
+                <select class="ui-input select2" id="user_id" required>
+                    <option value=""></option>
+                    @foreach ($products as $sp)
+                        <option value="{{ $sp->id }}">{{ $sp->name_product }}</option>
+                    @endforeach
+                    <!-- Thêm các lựa chọn tìm kiếm ở đây -->
+                </select>
                 <div class="ui-input-underline"></div>
                 <div class="ui-input-highlight"></div>
                 <div class="ui-input-icon">
@@ -18,6 +24,7 @@
                     </svg>
                 </div>
             </div>
+
         </div>
 
         <ul class="menu_nav m-0 d-flex align-items-center gap-5">
@@ -67,3 +74,29 @@
         </ul>
     </nav>
 </header>
+<script>
+    $(document).ready(function() {
+        $('#user_id').select2();
+    });
+</script>
+<style>
+    .select2-selection__arrow {
+        display: none;
+    }
+
+    .select2-container--default .select2-selection--single {
+        background: none !important;
+        padding: 22px 0;
+    }
+
+    .ui-input-icon svg {
+        margin-bottom: 0;
+    }
+
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        padding-left: 38px;
+        padding-top: 0;
+        margin-top: -12px;
+        color: #fff;
+    }
+</style>
