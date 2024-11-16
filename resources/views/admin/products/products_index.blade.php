@@ -20,16 +20,22 @@
             </div>
         </div>
     </div>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body" style="padding-bottom: 0px!important;padding-top: 0px!important;">
                     <div class="form-group mb-0">
                         <div><br></div>
-                        <a href="{{ route('deal_sale.create') }}" name="create"
+                        {{-- <a href="{{ route('products.create') }}" name="create"
                             class="btn btn-success waves-effect waves-light">
                             Thêm mới
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             </div>
@@ -49,16 +55,15 @@
                                 <!-- STT	UserID	Server	Question	Answer	Time	Status	Reply -->
                                 <thead>
                                     <th>STT</th>
-                                    <th>Image</th>
                                     <th>Tên sản phẩm</th>
-                                    <th>Mô tả ngắn</th>
-                                    <th>Thông số kỹ thuật</th>
                                     <th>Giá sản phẩm</th>
                                     <th>Khuyến mãi</th>
-                                    <th>Mô tả bảo hành</th>
+                                    <th>Ảnh sản phẩm</th>
+                                    <th>Thông số kỹ thuật</th>
+                                    <th>Mô tả</th>
                                     <th>Ưu đãi đặc biệt</th>
                                     <th>Đánh giá</th>
-                                    <th>Vị trí phần</th>
+                                    <th>Trạng thái</th>
                                     <th>Hành động</th>
                                 </thead>
 
@@ -66,46 +71,33 @@
                                     @foreach ($data as $d)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td><img style="width: 100px;"src={{ asset($d->image) }} alt=""></td>
                                             <td>{{ $d->name_product }}</td>
-                                            <td>{{ $d->content }}</td>
-                                            <td style="text-align: unset">{!! $d->parameter !!}</td>
                                             <td>{{ $d->price }}</td>
-                                            <td style="text-align: unset">{!! $d->promotion !!}</td>
+                                            <td>{!! $d->promotion !!}</td>
+                                            <td><img style="width: 100px;"src={{ asset($d->image) }} alt=""></td>
+                                            <td>{!! $d->parameter !!}</td>
                                             <td style="text-align: unset">{!! $d->mo_ta !!}</td>
-                                            <td style="text-align: unset">{!! $d->endow !!}</td>
+                                            <td>{!! $d->endow !!}</td>
                                             <td>{{ $d->evaluate }} sao</td>
                                             <td>
-                                                @if ($d->vi_tri == 1)
-                                                    DEAL SALE - Bàn phím cơ
-                                                @elseif ($d->vi_tri == 2)
-                                                    DEAL SALE - Bàn phím văn phòng
-                                                @elseif ($d->vi_tri == 3)
-                                                    DEAL SALE - Keycaps
-                                                @elseif ($d->vi_tri == 4)
-                                                    Các loại phím cơ
-                                                @elseif ($d->vi_tri == 5)
-                                                    Các loại phím văn phòng
-                                                @elseif ($d->vi_tri == 6)
-                                                    Các loại keycaps
-                                                @elseif ($d->vi_tri == 7)
-                                                    Các loại switch
+                                                @if ($d->status == 1)
+                                                    <span style="color: green">Đã update</span>
+                                                @else
+                                                    <span style="color: red">Chưa update</span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a style="background-color: #3498db; border-color:#3498db;color:whitesmoke;"
-                                                    href="{{ route('deal_sale.update', ['id' => $d->id]) }}"
-                                                    class="btn waves-effect waves-light">SỬA</a>
-                                                <a href="{{ route('deal_sale.delete') }}" value="{{ $d->id }}"
-                                                    class="btn btn-danger btn-md btn-dell">Xóa</a>
+                                                <a style="background-color: #dbca34; border-color:#e2d136; color:whitesmoke;"
+                                                    href="{{ route('products.update', ['id' => $d->id]) }}"
+                                                    class="btn waves-effect waves-light">UPDATE</a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
 
                             </table>
-                        @endisset
-                    </div>
+                        </div>
+                    @endisset
 
                 </div>
             </div>
@@ -136,7 +128,7 @@
         //     });
         // });
     </script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#table-games').dataTable({
                 'order': [],
@@ -165,7 +157,7 @@
                         if (result == true) {
                             $.ajax({
                                 type: 'post',
-                                url: '{{ route('deal_sale.delete') }}',
+                                url: '{{ route('products.delete') }}',
                                 data: {
                                     id: id,
                                     _token: $('#ajaxToken').val()
@@ -185,5 +177,5 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 @endsection

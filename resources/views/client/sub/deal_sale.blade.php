@@ -114,7 +114,8 @@
                                 <div class="card-body d-flex flex-column justify-content-between gap-2">
                                     <h5 class="card-title mb-0" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalPanel"
-                                        onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->title }}</h5>
+                                        onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->name_product }}
+                                    </h5>
                                     <p class="card-text mb-0 t_over">{{ $ds->content }}</p>
                                     <div class="scene">
                                         <div class="cube">
@@ -149,7 +150,8 @@
                                 <div class="card-body d-flex flex-column justify-content-between gap-2">
                                     <h5 class="card-title mb-0" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalPanel"
-                                        onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->title }}</h5>
+                                        onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->name_product }}
+                                    </h5>
                                     <p class="card-text mb-0 t_over">{{ $ds->content }}</p>
                                     <div class="scene">
                                         <div class="cube">
@@ -185,7 +187,8 @@
                                 <div class="card-body d-flex flex-column justify-content-between gap-2">
                                     <h5 class="card-title mb-0" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalPanel"
-                                        onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->title }}</h5>
+                                        onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->name_product }}
+                                    </h5>
                                     <p class="card-text mb-0 t_over">{{ $ds->content }}</p>
                                     <div class="scene">
                                         <div class="cube">
@@ -241,23 +244,21 @@
                         </div>
                         <div class="article ps-4 col-8">
                             <div class="col-12 fw-bold fs-4" id="modalTitle2"></div>
-                            <div class="col-12">Sao đánh giá</div>
+                            <div class="col-12" id="modalRating"
+                                style="margin: 4px 0 0 8px;font-size: 18px;color: #f0f073;"></div>
                             <div class="col-12 fs-2 text-danger mt-3 fw-bold" id="modalPrice"></div>
                             <div class="col-12 mt-3">
                                 <div class="text-danger fw-bold p-3"
                                     style="background: rgb(241, 158, 158); border-radius: 4px 4px 0 0">
                                     Quà tặng khuyến mãi
                                 </div>
-                                <div class="text-danger p-3"
+                                <div class="text-danger p-3" id="modalKhuyenMai"
                                     style="border: 1px solid rgb(241, 158, 158); border-radius: 0 0 4px 4px">
-                                    Tặng ngay em phương anh 2005
                                 </div>
                             </div>
                             <button type="button" class="btn btn-danger mt-3 p-5 pt-2 pb-2 fs-4">MUA NGAY</button>
                             <div class="col-12 mt-3">
-                                <li>Bảo hành chính hãng 12 tháng</li>
-                                <li>Hỗ trợ đổi mới trong 7 ngày</li>
-                                <li>Miễn phí giao hàng toàn quốc</li>
+                                <div id="modalMoTa"></div>
                             </div>
                             <div class="col-12 mt-4">
                                 <div class="text-dark fw-bold p-3"
@@ -265,8 +266,8 @@
                                     Ưu đãi đặc biệt
                                 </div>
                                 <div class="text-dark p-3"
-                                    style="border: 1px solid rgb(153, 150, 150); border-radius: 0 0 4px 4px">
-                                    Được ôm phương anh nhóm quái xế 1 cái
+                                    style="border: 1px solid rgb(153, 150, 150); border-radius: 0 0 4px 4px"
+                                    id="modalUudai">
                                 </div>
                             </div>
                             <div class="col-12 fs-5 fw-bold mt-4">Liên hệ</div>
@@ -308,10 +309,30 @@
 </script>
 <script>
     function updateModalContent(data) {
-        document.getElementById('modalTitle1').innerText = data.title;
-        document.getElementById('modalTitle2').innerText = data.title;
+        document.getElementById('modalTitle1').innerText = data.name_product;
+        document.getElementById('modalTitle2').innerText = data.name_product;
         document.getElementById('modalImage').src = data.image;
-        document.getElementById('modalSpecifications').innerHTML = data.specifications || 'null';
+        document.getElementById('modalSpecifications').innerHTML = data.parameter || 'null';
         document.getElementById('modalPrice').innerText = data.price || 'Đang cập nhật';
+        document.getElementById('modalKhuyenMai').innerHTML = data.promotion;
+        document.getElementById('modalUudai').innerHTML = data.endow;
+        document.getElementById('modalMoTa').innerHTML = data.mo_ta;
+
+        // Cập nhật sao đánh giá
+        var ratingHtml = '';
+        var evaluate = data.evaluate; // Giá trị đánh giá sản phẩm
+
+        // Hiển thị sao đánh giá
+        for (var i = 1; i <= 5; i++) {
+            if (evaluate >= i) {
+                ratingHtml += '<i class="fa-solid fa-star"></i>'; // Sao đầy
+            } else if (evaluate >= i - 0.5) {
+                ratingHtml += '<i class="fa-solid fa-star-half-stroke"></i>'; // Sao nửa
+            } else {
+                ratingHtml += '<i class="fa-regular fa-star"></i>'; // Sao rỗng
+            }
+        }
+
+        document.getElementById('modalRating').innerHTML = data.evaluate + ratingHtml;
     }
 </script>

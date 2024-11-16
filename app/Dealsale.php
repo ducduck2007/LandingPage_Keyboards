@@ -10,6 +10,6 @@ class Dealsale extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'id', 'image', 'title', 'content', 'price', 'vi_tri', 'specifications'
+        'id', 'image', 'name_product', 'content', 'price', 'vi_tri', 'parameter', 'promotion', 'mo_ta', 'endow', 'evaluate'
     ];
 }

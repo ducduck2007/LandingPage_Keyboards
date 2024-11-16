@@ -41,6 +41,9 @@
         <li @if ($routeName == 'deal_sale.index' || $routeName == 'deal_sale.update' || $routeName == 'deal_sale.create') class='mm-active' @endif><a href="{{ route('deal_sale.index') }}"
                 class="waves-effect"><span>QL card sản phẩm</span></a>
         </li>
+        <li @if ($routeName == 'products.index' || $routeName == 'products.update' || $routeName == 'products.create') class='mm-active' @endif><a href="{{ route('products.index') }}"
+                class="waves-effect"><span>Tổng sản phẩm</span></a>
+        </li>
 
         <li class="menu-title">NGƯỜI DÙNG</li>
         <li><a href="{{ route('client.home') }}" class="waves-effect"><i

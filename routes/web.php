@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 // Route cho trang chủ
-Route::get('/', 'Client\HomeController@index')->name('client.home');
+Route::get('/', 'Client\HomeController@index')->name('client.home2');
 
 // Authentication Routes
 // Route đăng nhập
@@ -22,4 +22,3 @@ Route::post('password/email', 'Client\Auth\ForgotPasswordController@sendResetLin
 // Route đặt lại mật khẩu
 Route::get('password/reset/{token}', 'Client\Auth\ResetPasswordController@showResetForm')->name('client.password.reset');
 Route::post('password/reset', 'Client\Auth\ResetPasswordController@reset')->name('client.password.update');
-

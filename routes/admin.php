@@ -67,3 +67,17 @@ Route::group(['prefix' => 'featured_photo', 'middleware' => ['admin']], function
     Route::post('post-create', 'Admin\FeaturedphotoController@postCreate')->name('featured_photo.postCreate');
     Route::post('delete', 'Admin\FeaturedphotoController@delete')->name('featured_photo.delete');
 });
+
+Route::group(['prefix' => 'products', 'middleware' => ['admin']], function () {
+    Route::get('index', 'Admin\ProductsController@index')->name('products.index');
+    Route::get('update/{id}', 'Admin\ProductsController@postUpdate')->name('products.update');
+});
+
+Route::group(['prefix' => 'contact', 'middleware' => ['admin']], function () {
+    Route::get('index', 'Admin\ContactController@index')->name('contact.index');
+    Route::get('update/{id}', 'Admin\ContactController@update')->name('contact.update');
+    Route::post('post-update', 'Admin\ContactController@postUpdate')->name('contact.postUpdate');
+    Route::get('create', 'Admin\ContactController@create')->name('contact.create');
+    Route::post('post-create', 'Admin\ContactController@postCreate')->name('contact.postCreate');
+    Route::post('delete', 'Admin\ContactController@delete')->name('contact.delete');
+});

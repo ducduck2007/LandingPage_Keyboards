@@ -13,17 +13,17 @@
                 @foreach ($deal_sale as $ds)
                     @if ($ds->vi_tri == 4)
                         <div class="card item" style="height: 400px; border-radius: 4px;"
-                            data-title="{{ $ds->title }}" data-image="{{ $ds->image }}"
-                            data-specifications="{{ $ds->specifications }}" data-price="{{ $ds->price }}">
+                            data-title="{{ $ds->name_product }}" data-image="{{ $ds->image }}"
+                            data-specifications="{{ $ds->parameter }}" data-price="{{ $ds->price }}">
                             <img src="{{ $ds->image }}" class="card-img-top" alt="..."
                                 style="height: 50%; object-fit: cover;">
                             <div class="card-body d-flex flex-column justify-content-between gap-2">
                                 {{-- <h5 class="card-title mb-0" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalCardPhim">
-                                    {{ $ds->title }}
+                                    {{ $ds->name_product }}
                                 </h5> --}}
                                 <h5 class="card-title mb-0" data-bs-toggle="modal" data-bs-target="#exampleModalPanel"
-                                    onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->title }}</h5>
+                                    onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->name_product }}</h5>
                                 <p class="card-text mb-0 t_over">{{ $ds->content }}</p>
                                 <div class="scene">
                                     <div class="cube">

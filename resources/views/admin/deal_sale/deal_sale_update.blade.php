@@ -31,9 +31,9 @@
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label class="col-form-label">Tiêu đề</label>
-                                    <input class="form-control" type="text" name="title" required
-                                        placeholder="Nhập tiêu đề" value="{{ old('title', $model->title) }}">
+                                    <label class="col-form-label">Tên sản phẩm</label>
+                                    <input class="form-control" type="text" name="name_product" required
+                                        placeholder="Nhập tiêu đề" value="{{ old('name_product', $model->name_product) }}">
                                 </div>
                             </div>
                             <div class="col-4">
@@ -76,8 +76,32 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Thông số kỹ thuật</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" id="editor" name="specifications" required placeholder="Nhập thông số kỹ thuật"
-                                    rows="3" cols="10">{{ old('specifications', $model->specifications) }}</textarea>
+                                <textarea class="form-control" id="parameter-editor" name="parameter" required placeholder="Nhập thông số kỹ thuật"
+                                    rows="3" cols="10">{{ old('parameter', $model->parameter) }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Khuyến mãi</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="promotion-editor" name="promotion" required placeholder="Nhập thông số kỹ thuật"
+                                    rows="3" cols="10">{{ old('promotion', $model->promotion) }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Mô tả bảo hành</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="mo_ta-editor" name="mo_ta" required placeholder="Nhập thông số kỹ thuật"
+                                    rows="3" cols="10">{{ old('mo_ta', $model->mo_ta) }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Ưu đãi đặc biệt</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="endow-editor" name="endow" required placeholder="Nhập thông số kỹ thuật"
+                                    rows="3" cols="10">{{ old('endow', $model->endow) }}</textarea>
                             </div>
                         </div>
 
@@ -97,6 +121,56 @@
                                     <img src="{{ asset($model->image) }}" id="example_Image" width="150"
                                         alt="Preview Image">
                                 </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Đánh giá</label>
+                                    <select class="form-control" name="evaluate" required>
+                                        <option value="0.5"
+                                            {{ old('evaluate', $model->evaluate) == 0.5 ? 'selected' : '' }}>
+                                            0.5 sao
+                                        </option>
+                                        <option value="1"
+                                            {{ old('evaluate', $model->evaluate) == 1 ? 'selected' : '' }}>
+                                            1 sao
+                                        </option>
+                                        <option value="1.5"
+                                            {{ old('evaluate', $model->evaluate) == 1.5 ? 'selected' : '' }}>
+                                            1.5 sao
+                                        </option>
+                                        <option value="2"
+                                            {{ old('evaluate', $model->evaluate) == 2 ? 'selected' : '' }}>
+                                            2 sao
+                                        </option>
+                                        <option value="2.5"
+                                            {{ old('evaluate', $model->evaluate) == 2.5 ? 'selected' : '' }}>
+                                            2.5 sao
+                                        </option>
+                                        <option value="3"
+                                            {{ old('evaluate', $model->evaluate) == 3 ? 'selected' : '' }}>
+                                            3 sao
+                                        </option>
+                                        <option value="3.5"
+                                            {{ old('evaluate', $model->evaluate) == 3.5 ? 'selected' : '' }}>
+                                            3.5 sao
+                                        </option>
+                                        <option value="4"
+                                            {{ old('evaluate', $model->evaluate) == 4 ? 'selected' : '' }}>
+                                            4 sao
+                                        </option>
+                                        <option value="4.5"
+                                            {{ old('evaluate', $model->evaluate) == 4.5 ? 'selected' : '' }}>
+                                            4.5 sao
+                                        </option>
+                                        <option value="5"
+                                            {{ old('evaluate', $model->evaluate) == 5 ? 'selected' : '' }}>
+                                            5 sao
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
@@ -127,12 +201,27 @@
     <script src="{{ asset('assets/plugins/select2-4.1.0/dist/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
     <script>
-        CKEDITOR.replace('editor', {
+        CKEDITOR.replace('parameter-editor', {
 
             filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
             filebrowserUploadMethod: 'form'
         });
-        CKEDITOR.config.height = 500;
+        CKEDITOR.replace('promotion-editor', {
+
+            filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+            filebrowserUploadMethod: 'form'
+        });
+        CKEDITOR.replace('mo_ta-editor', {
+
+            filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+            filebrowserUploadMethod: 'form'
+        });
+        CKEDITOR.replace('endow-editor', {
+
+            filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+            filebrowserUploadMethod: 'form'
+        });
+        CKEDITOR.config.height = 200;
     </script>
     <script>
         $(document).ready(function() {

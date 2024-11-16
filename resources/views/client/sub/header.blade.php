@@ -6,16 +6,17 @@
                 <div class="namePage text-light fw-bold" style="font-family: unset !important;">Đƚԋɳιҽɳ <br> VHB
                 </div>
             </div>
+            <!-- Dropdown chọn sản phẩm -->
             <div class="ui-input-container ms-3">
                 <select class="ui-input select2" id="user_id" required>
-                    <option value=""></option>
+                    <option value="">Chọn sản phẩm tìm kiếm</option>
                     @foreach ($products as $sp)
-                        <option data-name="{{ $sp->name_product }}"
-                            data-description="Mô tả sản phẩm {{ $sp->id }}" value="{{ $sp->id }}">
+                        <option data-name="{{ $sp->name_product }}" data-description="{{ $sp->parameter }}"
+                            data-price="{{ $sp->price }}" data-promotion="{{ $sp->promotion }}"
+                            value="{{ $sp->id }}">
                             {{ $sp->name_product }}
                         </option>
                     @endforeach
-                    <!-- Thêm các lựa chọn tìm kiếm ở đây -->
                 </select>
                 <div class="ui-input-underline"></div>
                 <div class="ui-input-highlight"></div>
@@ -28,6 +29,8 @@
                 </div>
             </div>
 
+            {{-- <button type="button" class="btnSearch" data-bs-toggle="modal" data-bs-target="#exampleModalSearchNav">Tìm
+                kiếm</button> --}}
         </div>
 
         <ul class="menu_nav m-0 d-flex align-items-center gap-5">
@@ -78,26 +81,6 @@
     </nav>
 </header>
 
-<!-- Modal tìm kiếm sản phẩm -->
-<div class="modal fade" id="exampleModalSearch" tabindex="-1" aria-labelledby="exampleModalSearchLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalSearchLabel">Chi tiết sản phẩm</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="productName">Tên sản phẩm: </p>
-                <p id="productDescription">Mô tả: </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
     $(document).ready(function() {
         $('#user_id').select2();
@@ -135,5 +118,24 @@
         padding-top: 0;
         margin-top: -12px;
         color: #fff;
+    }
+
+    .btnSearch {
+        outline: none;
+        background: none;
+        border-radius: 4px;
+        color: #fff;
+        padding: 10px 35px;
+        border: 2px solid #ccc;
+        margin-left: 1rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s ease;
+    }
+
+    .btnSearch:hover {
+        background: #fff;
+        border: 2px solid #fff;
+        color: #000;
     }
 </style>
