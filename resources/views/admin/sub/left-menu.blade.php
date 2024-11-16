@@ -44,9 +44,12 @@
         <li @if ($routeName == 'products.index' || $routeName == 'products.update' || $routeName == 'products.create') class='mm-active' @endif><a href="{{ route('products.index') }}"
                 class="waves-effect"><span>Tổng sản phẩm</span></a>
         </li>
+        <li @if ($routeName == 'contact.index' || $routeName == 'contact.update' || $routeName == 'contact.create') class='mm-active' @endif><a href="{{ route('contact.index') }}"
+                class="waves-effect"><span>Liên hệ</span></a>
+        </li>
 
         <li class="menu-title">NGƯỜI DÙNG</li>
-        <li><a href="{{ route('client.home') }}" class="waves-effect"><i
+        <li><a href="{{ route('client.home2') }}" class="waves-effect"><i
                     class="dripicons-power"></i><span>Thoát</span></a>
         </li>
 

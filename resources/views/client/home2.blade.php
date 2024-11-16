@@ -85,7 +85,7 @@
     </div>
 
     <style>
-        .card {
+        #modalTbao .card {
             width: auto;
             margin: 0 auto;
             background-color: #f4f4f3;
@@ -96,7 +96,7 @@
             flex-direction: column;
         }
 
-        .card::after {
+        #modalTbao .card::after {
             position: absolute;
             content: '';
             background-color: #454a50;
@@ -106,7 +106,7 @@
             border-radius: 8px;
         }
 
-        .tools {
+        #modalTbao .tools {
             display: flex;
             align-items: center;
             padding: 9px;
@@ -115,28 +115,28 @@
             margin-top: -2px;
         }
 
-        .circle {
+        #modalTbao .circle {
             padding: 0 4px;
         }
 
-        .card__content {
+        #modalTbao .card__content {
             margin: 0px;
             border-radius: 8px;
             background: #f4f4f3;
             padding: 10px;
         }
 
-        .title {
+        #modalTbao .title {
             font-size: 20px;
             margin-bottom: 10px;
         }
 
-        .content {
+        #modalTbao .content {
             margin-top: 10px;
             font-size: 14px;
         }
 
-        .box {
+        #modalTbao .box {
             display: inline-block;
             align-items: center;
             width: 10px;
@@ -145,15 +145,15 @@
             border-radius: 50%;
         }
 
-        .red {
+        #modalTbao .red {
             background-color: #ff605c;
         }
 
-        .yellow {
+        #modalTbao .yellow {
             background-color: #ffbd44;
         }
 
-        .green {
+        #modalTbao .green {
             background-color: #00ca4e;
         }
     </style>

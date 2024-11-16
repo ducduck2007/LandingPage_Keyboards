@@ -36,7 +36,11 @@
         <ul class="menu_nav m-0 d-flex align-items-center gap-5">
             <li class="d-flex align-items-center gap-2">
                 <i class="fa-solid fa-phone-volume icon"></i>
-                <a href="#" class="text-light textNav">Hotline <br>1900.1018</a>
+                @foreach ($contact as $item)
+                    @if ($item->hinh_thuc == 'zalo')
+                        <a href="{{ $item->link }}" class="text-light textNav">Zalo <br>0987263546</a>
+                    @endif
+                @endforeach
             </li>
 
             <li onclick="showAlertNotLogin()" class="d-flex align-items-center gap-2">
