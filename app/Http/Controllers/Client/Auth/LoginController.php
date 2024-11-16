@@ -33,6 +33,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('client.login')->with('success', 'Đăng xuất thành công!');
+        return redirect()->route('client.home2')->with('success', 'Đăng xuất thành công!');
     }
 }

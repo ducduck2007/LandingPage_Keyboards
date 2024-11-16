@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route cho trang chủ
 Route::get('/', 'Client\HomeController@index')->name('client.home2');
+Route::get('/trangChu', 'Client\HomeController@index2')->name('client.home');
 
 // Authentication Routes
 // Route đăng nhập

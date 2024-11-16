@@ -194,7 +194,7 @@
 
 <body>
     <div class="container flex">
-        <a class="icon_back" href="{{ route('client.home') }}">
+        <a class="icon_back" href="{{ route('client.home2') }}">
             <i class="fa-solid fa-rotate-left"></i>
             <span>Quay lại trang chủ</span>
         </a>
