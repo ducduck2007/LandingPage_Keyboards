@@ -10,7 +10,10 @@
                 <select class="ui-input select2" id="user_id" required>
                     <option value=""></option>
                     @foreach ($products as $sp)
-                        <option value="{{ $sp->id }}">{{ $sp->name_product }}</option>
+                        <option data-name="{{ $sp->name_product }}"
+                            data-description="Mô tả sản phẩm {{ $sp->id }}" value="{{ $sp->id }}">
+                            {{ $sp->name_product }}
+                        </option>
                     @endforeach
                     <!-- Thêm các lựa chọn tìm kiếm ở đây -->
                 </select>
@@ -74,9 +77,43 @@
         </ul>
     </nav>
 </header>
+
+<!-- Modal tìm kiếm sản phẩm -->
+<div class="modal fade" id="exampleModalSearch" tabindex="-1" aria-labelledby="exampleModalSearchLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalSearchLabel">Chi tiết sản phẩm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="productName">Tên sản phẩm: </p>
+                <p id="productDescription">Mô tả: </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         $('#user_id').select2();
+
+        $('#productSelect').on('change', function() {
+            const selectedOption = $(this).find(':selected');
+            const name = selectedOption.data('name');
+            const description = selectedOption.data('description');
+
+            // Gán dữ liệu vào modal
+            $('#productName').text(`Tên sản phẩm: ${name}`);
+            $('#productDescription').text(`Mô tả: ${description}`);
+
+            // Hiển thị modal
+            $('#exampleModalSearch').modal('show');
+        });
     });
 </script>
 <style>

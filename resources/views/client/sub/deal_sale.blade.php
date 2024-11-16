@@ -105,7 +105,7 @@
                     <button id="nextBtn1"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
 
-                <div class="owl-carousel owl-theme" id="panel1-carousel" style="overflow: hidden;">
+                <div class="owl-carousel owl-theme" id="panel1-carousel" style="overflow: hidden; display: unset;">
                     @foreach ($deal_sale as $index => $ds)
                         @if ($ds->vi_tri == 1)
                             <div class="card item" style="height: 400px; border-radius: 4px;">

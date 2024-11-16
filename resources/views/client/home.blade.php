@@ -32,7 +32,6 @@
 
     {{-- Thư viện tìm kiếm --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
     <title>ĐOÀN THANH NIÊN VÌ HÒA BÌNH</title>
