@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\DataUser;
@@ -22,14 +23,8 @@ class HomeController extends Controller
         $contact = DB::select("SELECT * FROM contact");
 
         return view('client.home2', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo', 'products', 'contact'));
-    }    
-
-    public function __construct()
-    {
-        // Chỉ áp dụng middleware 'auth' cho phương thức index2
-        $this->middleware('auth')->only('index2');
     }
-    
+
     public function index2()
     {
         $deal_sale = DB::select("SELECT * FROM deal_sale");
@@ -41,6 +36,5 @@ class HomeController extends Controller
         $contact = DB::select("SELECT * FROM contact");
 
         return view('client.home', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo', 'products', 'contact'));
-    }    
-
+    }
 }

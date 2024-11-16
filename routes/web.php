@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Client\HomeController@index')->name('client.home2');
 
 Auth::routes();
-Route::middleware(['auth'])->group(function () {
-    Route::get('/trangChu', 'Client\HomeController@index2')->name('client.home');
-});
+Route::get('/trangChu', 'Client\HomeController@index')
+    ->middleware('check.login')
+    ->name('client.home');
 
 // Authentication Routes
 // Route đăng nhập
