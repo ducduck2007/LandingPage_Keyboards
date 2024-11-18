@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Client\HomeController@index')->name('client.home2');
 
 Auth::routes();
-Route::get('/trangChu', 'Client\HomeController@index')
-    ->middleware('check.login')
-    ->name('client.home');
+Route::middleware('auth')->group(function () {
+    Route::get('/trangChu', 'Client\HomeController@index2')->name('client.home');
+});
 
 // Authentication Routes
 // Route đăng nhập
@@ -26,4 +26,4 @@ Route::post('password/email', 'Client\Auth\ForgotPasswordController@sendResetLin
 
 // Route đặt lại mật khẩu
 Route::get('password/reset/{token}', 'Client\Auth\ResetPasswordController@showResetForm')->name('client.password.reset');
-Route::post('password/reset', 'Client\Auth\ResetPasswordController@reset')->name('client.password.update');
+Route::post('password/reset', 'Client\Auth\ResetPasswordController@reset')->name('client.password.update')

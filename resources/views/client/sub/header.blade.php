@@ -48,7 +48,7 @@
                 <a href="#" class="text-light textNav">Lịch sử <br>đặt hàng</a>
             </li>
 
-            <li class="d-flex align-items-center gap-2">
+            <li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#exampleModalGioHang">
                 <i class="fa-solid fa-cart-shopping icon"></i>
                 <a href="#" class="text-light textNav">Giỏ <br>hàng</a>
             </li>
