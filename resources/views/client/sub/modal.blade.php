@@ -1,56 +1,3 @@
-<style>
-    .socials li {
-        list-style: none;
-    }
-
-    .socials li a {
-        position: relative;
-        width: 60px;
-        height: 60px;
-        display: block;
-        text-align: center;
-        margin: 0 10px;
-        border-radius: 50%;
-        padding: 6px;
-        box-sizing: border-box;
-        text-decoration: none;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-        background: linear-gradient(0deg, #ddd, #fff);
-        transition: .5s;
-    }
-
-    .socials li a:hover {
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        text-decoration: none;
-    }
-
-    .socials li a .fas {
-        width: 100%;
-        height: 100%;
-        display: block;
-        background: linear-gradient(0deg, #fff, #ddd);
-        border-radius: 50%;
-        line-height: calc(60px - 12px);
-        font-size: 24px;
-        color: #262626;
-        transition: .5s;
-    }
-
-    .socials li:nth-child(1) a:hover .fas {
-        color: #3b5998;
-    }
-
-    .socials li:nth-child(2) a:hover .fas {
-        color: #00aced;
-    }
-
-    .gioHang {
-        border: 1px solid #262626;
-        padding: 2rem 0 0 3rem;
-        background: rgba(238, 238, 238, 0.5);
-    }
-</style>
-
 <!-- Modal ảnh sản phẩm nổi bật -->
 <div class="modal fade" id="exampleModalImageSanPhamNoiBat" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -201,8 +148,13 @@
                                 style="border: 1px solid rgb(241, 158, 158); border-radius: 0 0 4px 4px"
                                 id="product_promotion{{ $sp->id }}">{!! $sp->promotion !!}</div>
                         </div>
-                        <button type="button" id="notLogin" class="btn btn-danger mt-3 p-5 pt-2 pb-2 fs-4">MUA
-                            NGAY</button>
+
+                        <button type="button" class="btn btn-danger mt-3 p-5 pt-2 pb-2 fs-4 buy-now"
+                            data-name="{{ $sp->name_product }}" data-image="{{ $sp->image }}"
+                            data-price="{{ $sp->price }}">
+                            MUA NGAY
+                        </button>
+
                         <div class="col-12 mt-3">
                             {!! $sp->mo_ta !!}
                         </div>
@@ -273,8 +225,8 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header container">
-                <a href="{{ route('client.home') }}" class="modal-title fs-5 d-flex align-items-center gap-2"
-                    id="exampleModalLabel" style="text-decoration: none">
+                <a href="" class="modal-title fs-5 d-flex align-items-center gap-2" data-bs-dismiss="modal"
+                    aria-label="Close" id="exampleModalLabel" style="text-decoration: none">
                     <i class="fa-solid fa-angles-left"></i>
                     <span>Mua thêm sản phẩm khác</span>
                 </a>
@@ -283,7 +235,8 @@
             <div class="modal-body container d-flex justify-content-start align-items-center flex-column">
                 <i class="fa-solid fa-bag-shopping"
                     style="position: absolute;right: 15px;font-size: 32px;rotate: 15deg;"></i>
-                <div class="col-9 d-flex align-items-start mt-2 gap-4 gioHang">
+
+                {{-- <div class="col-9 d-flex align-items-start mt-2 gap-4 gioHang">
                     <div class="aside col-2">
                         <img src="{{ $header[0]->image }}" alt="" class="col-12">
                     </div>
@@ -291,7 +244,6 @@
                         <div class="col-12 fw-bold fs-5">{{ $header[0]->title }}</div>
                         <div class="col-12 fs-6">Mô tả</div>
                         <div class="col-12 fs-6 text-danger mt-1 fw-bold">32.990.000₫</div>
-                        {{-- <button type="button" class="btn btn-success mt-2 p-2 ps-3 pe-3 fs-6">THANH TOÁN</button> --}}
 
                         <div class="containerTT mt-2">
                             <div class="left-side">
@@ -323,254 +275,142 @@
                         </div>
 
                     </div>
+                </div> --}}
+
+                <div class="container-fluid col-11 mt-4">
+                    <div class=" table-page col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <p>GIỎ HÀNG</p>
+                                <div class="table-responsive">
+                                    <table class="table-user table table-striped table-bordered table-hover"
+                                        id="example" class="display" style="width:100%">
+                                        <!-- STT	UserID	Server	Question	Answer	Time	Status	Reply -->
+                                        <thead>
+                                            <th style="text-align: center">STT</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th style="text-align: center">Ảnh sản phẩm</th>
+                                            <th>Số lượng</th>
+                                        </thead>
+                                        <tbody id="giohang-table">
+                                            @foreach ($giohang as $d)
+                                                <tr>
+                                                    <td style="text-align: center">{{ $d->quantity }}</td>
+                                                    <!-- Số lượng sản phẩm -->
+                                                    <td>{{ $d->name_product }}</td>
+                                                    <td style="text-align: center"><img width="100px"
+                                                            src="{{ $d->image }}" alt=""></td>
+                                                    <td>
+                                                        <div class="quantity-container">
+                                                            <input type="text" class="quantity-input" disabled
+                                                                value="{{ $d->quantity }}" min="1">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
+                                    <div class="containerTT">
+                                        <div class="left-side">
+                                            <div class="cardTT">
+                                                <div class="card-line"></div>
+                                                <div class="buttons"></div>
+                                            </div>
+                                            <div class="post">
+                                                <div class="post-line"></div>
+                                                <div class="screen">
+                                                    <div class="dollar">$</div>
+                                                </div>
+                                                <div class="numbers"></div>
+                                                <div class="numbers-line2"></div>
+                                            </div>
+                                        </div>
+                                        <div class="right-side">
+                                            <div class="new">Thanh toán</div>
+
+                                            <svg viewBox="0 0 451.846 451.847" height="512" width="512"
+                                                xmlns="http://www.w3.org/2000/svg" class="arrow">
+                                                <path fill="#cfcfcf" class="active-path"
+                                                    d="M345.441 248.292L151.154 442.573c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744L278.318 225.92 106.409 54.017c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.287 194.284c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373z">
+                                                </path>
+                                            </svg>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
 </div>
-<style>
-    .containerTT {
-        background-color: #ffffff;
-        display: flex;
-        width: 460px;
-        height: 120px;
-        position: relative;
-        border-radius: 6px;
-        transition: 0.3s ease-in-out;
-        scale: 0.6;
+<script>
+    document.querySelectorAll('.buy-now').forEach(button => {
+        button.addEventListener('click', function() {
+            const name = this.getAttribute('data-name');
+            const image = this.getAttribute('data-image');
+            const price = this.getAttribute('data-price');
+
+            console.log('Tên:', name, 'Hình ảnh:', image, 'Giá:', price);
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('cart.add') }}",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    name: name,
+                    image: image,
+                    price: price
+                },
+                success: function(response) {
+                    console.log("done");
+                },
+                error: function(error) {
+                    console.log("that bai");
+                }
+            });
+            alert("Đã thêm vào giỏ hàng thành công!");
+            alert("Giỏ hàng sẽ cập nhật sau 10 giây");
+        });
+    });
+</script>
+<script>
+    // Hàm để load lại giỏ hàng
+    function loadCart() {
+        $.ajax({
+            url: "{{ route('update.cart') }}", // Đường dẫn tới route AJAX
+            method: "GET",
+            success: function(response) {
+                if (response.length === 0) {
+                    return; // Nếu không có giỏ hàng, không làm gì
+                }
+
+                let giohangContent = '';
+
+                response.forEach(function(item) {
+                    giohangContent += `
+                        <tr>
+                            <td style="text-align: center">${item.quantity}</td> <!-- Số lượng -->
+                            <td>${item.name_product}</td> <!-- Tên sản phẩm -->
+                            <td style="text-align: center"><img width="100px" src="${item.image}" alt=""></td> <!-- Hình ảnh sản phẩm -->
+                            <td>
+                                <div class="quantity-container">
+                                    <input type="number" id="quantity" value="${item.quantity}" min="1">
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                $('#giohang-table').html(giohangContent);
+            }
+        });
     }
 
-    .containerTT:hover {
-        transform: scale(1.03);
-        width: 220px;
-    }
-
-    .containerTT:hover .left-side {
-        width: 100%;
-    }
-
-    .left-side {
-        background-color: #5de2a3;
-        width: 130px;
-        height: 120px;
-        border-radius: 4px;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: 0.3s;
-        flex-shrink: 0;
-        overflow: hidden;
-    }
-
-    .right-side {
-        width: calc(100% - 130px);
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        cursor: pointer;
-        justify-content: space-between;
-        white-space: nowrap;
-        transition: 0.3s;
-    }
-
-    .right-side:hover {
-        background-color: #f9f7f9;
-    }
-
-    .arrow {
-        width: 20px;
-        height: 20px;
-        margin-right: 20px;
-    }
-
-    .new {
-        font-size: 23px;
-        font-family: "Lexend Deca", sans-serif;
-        margin-left: 20px;
-    }
-
-    .cardTT {
-        width: 70px;
-        height: 46px;
-        background-color: #c7ffbc;
-        border-radius: 6px;
-        position: absolute;
-        display: flex;
-        z-index: 10;
-        flex-direction: column;
-        align-items: center;
-        -webkit-box-shadow: 9px 9px 9px -2px rgba(77, 200, 143, 0.72);
-        -moz-box-shadow: 9px 9px 9px -2px rgba(77, 200, 143, 0.72);
-        -webkit-box-shadow: 9px 9px 9px -2px rgba(77, 200, 143, 0.72);
-    }
-
-    .card-line {
-        width: 65px;
-        height: 13px;
-        background-color: #80ea69;
-        border-radius: 2px;
-        margin-top: 7px;
-    }
-
-    @media only screen and (max-width: 480px) {
-        .containerTT {
-            transform: scale(0.7);
-        }
-
-        .containerTT:hover {
-            transform: scale(0.74);
-        }
-
-        .new {
-            font-size: 18px;
-        }
-    }
-
-    .buttons {
-        width: 8px;
-        height: 8px;
-        background-color: #379e1f;
-        box-shadow: 0 -10px 0 0 #26850e, 0 10px 0 0 #56be3e;
-        border-radius: 50%;
-        margin-top: 5px;
-        transform: rotate(90deg);
-        margin: 10px 0 0 -30px;
-    }
-
-    .containerTT:hover .cardTT {
-        animation: slide-top 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) both;
-    }
-
-    .containerTT:hover .post {
-        animation: slide-post 1s cubic-bezier(0.165, 0.84, 0.44, 1) both;
-    }
-
-    @keyframes slide-top {
-        0% {
-            -webkit-transform: translateY(0);
-            transform: translateY(0);
-        }
-
-        50% {
-            -webkit-transform: translateY(-70px) rotate(90deg);
-            transform: translateY(-70px) rotate(90deg);
-        }
-
-        60% {
-            -webkit-transform: translateY(-70px) rotate(90deg);
-            transform: translateY(-70px) rotate(90deg);
-        }
-
-        100% {
-            -webkit-transform: translateY(-8px) rotate(90deg);
-            transform: translateY(-8px) rotate(90deg);
-        }
-    }
-
-    .post {
-        width: 63px;
-        height: 75px;
-        background-color: #dddde0;
-        position: absolute;
-        z-index: 11;
-        bottom: 10px;
-        top: 120px;
-        border-radius: 6px;
-        overflow: hidden;
-    }
-
-    .post-line {
-        width: 47px;
-        height: 9px;
-        background-color: #545354;
-        position: absolute;
-        border-radius: 0px 0px 3px 3px;
-        right: 8px;
-        top: 8px;
-    }
-
-    .post-line:before {
-        content: "";
-        position: absolute;
-        width: 47px;
-        height: 9px;
-        background-color: #757375;
-        top: -8px;
-    }
-
-    .screen {
-        width: 47px;
-        height: 23px;
-        background-color: #ffffff;
-        position: absolute;
-        top: 22px;
-        right: 8px;
-        border-radius: 3px;
-    }
-
-    .numbers {
-        width: 12px;
-        height: 12px;
-        background-color: #838183;
-        box-shadow: 0 -18px 0 0 #838183, 0 18px 0 0 #838183;
-        border-radius: 2px;
-        position: absolute;
-        transform: rotate(90deg);
-        left: 25px;
-        top: 52px;
-    }
-
-    .numbers-line2 {
-        width: 12px;
-        height: 12px;
-        background-color: #aaa9ab;
-        box-shadow: 0 -18px 0 0 #aaa9ab, 0 18px 0 0 #aaa9ab;
-        border-radius: 2px;
-        position: absolute;
-        transform: rotate(90deg);
-        left: 25px;
-        top: 68px;
-    }
-
-    @keyframes slide-post {
-        50% {
-            -webkit-transform: translateY(0);
-            transform: translateY(0);
-        }
-
-        100% {
-            -webkit-transform: translateY(-70px);
-            transform: translateY(-70px);
-        }
-    }
-
-    .dollar {
-        position: absolute;
-        font-size: 16px;
-        font-family: "Lexend Deca", sans-serif;
-        width: 100%;
-        left: 0;
-        top: 0;
-        color: #4b953b;
-        text-align: center;
-    }
-
-    .containerTT:hover .dollar {
-        animation: fade-in-fwd 0.3s 1s backwards;
-    }
-
-    @keyframes fade-in-fwd {
-        0% {
-            opacity: 0;
-            transform: translateY(-5px);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-</style>
+    setInterval(loadCart, 10000);
+    loadCart();
+</script>

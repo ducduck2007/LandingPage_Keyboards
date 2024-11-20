@@ -25,6 +25,7 @@
                 <i class="fa-regular fa-keyboard fw-bold"></i>
                 <div class="text-dark fw-bold">Switch</div>
             </li>
+            <img src="{{ asset('assets/images/flags/vietnam.png') }}" alt="vietnam" width="55px">
         </ul>
     </div>
 </div>

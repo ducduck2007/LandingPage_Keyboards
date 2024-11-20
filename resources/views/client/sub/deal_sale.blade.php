@@ -1,65 +1,3 @@
-<style>
-    .bg003 {
-        height: 400px;
-        background-image: url('{{ $deal_sale[0]->image }}');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100% 100%;
-        border-radius: 4px;
-        transition: background-size 0.3s ease;
-    }
-
-    .bg003:hover {
-        background-size: 110% 110%;
-    }
-
-    .scene {
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .cube {
-        color: #ccc;
-        cursor: pointer;
-        font-family: 'Roboto', sans-serif;
-        transition: all 0.85s cubic-bezier(.17, .67, .14, .93);
-        transform-style: preserve-3d;
-        transform-origin: 100% 50%;
-        width: 100%;
-        height: 4em;
-    }
-
-    .cube:hover {
-        transform: rotateX(-90deg);
-    }
-
-    .side {
-        box-sizing: border-box;
-        position: absolute;
-        display: inline-block;
-        height: 4em;
-        width: 100%;
-        text-align: center;
-        text-transform: uppercase;
-        padding-top: 1.5em;
-        font-weight: bold;
-    }
-
-    .top {
-        background: wheat;
-        color: #222229;
-        transform: rotateX(90deg) translate3d(0, 0, 2em);
-        box-shadow: inset 0 0 0 5px #fff;
-    }
-
-    .front {
-        background: #222229;
-        color: #fff;
-        box-shadow: inset 0 0 0 5px #fff;
-        transform: translate3d(0, 0, 2em);
-    }
-</style>
 <div class="container-fluid col-11 mt-5" id="scrollDealsale">
     <div class="col-12 bg001">
         <div class="d-flex align-items-center p-2 ps-3 gap-2">
@@ -256,7 +194,8 @@
                                     style="border: 1px solid rgb(241, 158, 158); border-radius: 0 0 4px 4px">
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-danger mt-3 p-5 pt-2 pb-2 fs-4">MUA NGAY</button>
+                            <button type="button" class="btn btn-danger btnMuaNgay mt-3 p-5 pt-2 pb-2 fs-4">MUA
+                                NGAY</button>
                             <div class="col-12 mt-3">
                                 <div id="modalMoTa"></div>
                             </div>
@@ -343,4 +282,38 @@
 
         document.getElementById('modalRating').innerHTML = data.evaluate + ratingHtml;
     }
+
+    document.querySelector('.btnMuaNgay').addEventListener('click', function() {
+        // Retrieve the product data
+        const name = document.getElementById('modalTitle1').innerText;
+        const imageFullPath = document.getElementById('modalImage').src;
+        const price = document.getElementById('modalPrice').innerText;
+
+        // Extract the path starting from '/uploads'
+        const image = imageFullPath.split('uploads')[1] ? 'uploads' + imageFullPath.split('uploads')[1] : '';
+
+        // Log the values to the console
+        console.log('Product Name:', name);
+        console.log('Image:', image);
+        console.log('Price:', price);
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('cart.add') }}",
+            data: {
+                _token: '{{ csrf_token() }}',
+                name: name,
+                image: image,
+                price: price
+            },
+            success: function(response) {
+                console.log("done");
+            },
+            error: function(error) {
+                console.log("that bai");
+            }
+        });
+        alert("Đã thêm vào giỏ hàng thành công!");
+        alert("Giỏ hàng sẽ cập nhật sau 10 giây");
+    });
 </script>
