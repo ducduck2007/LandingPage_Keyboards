@@ -28,4 +28,5 @@ Route::post('register', 'Client\Auth\RegisterController@register');
 // Route::post('password/reset', 'Client\Auth\ResetPasswordController@reset')->name('client.password.update')
 
 Route::post('/add-to-cart', 'Client\CartController@addToCart')->name('cart.add');
-                         
+Route::get('/update-cart', 'Client\CartController@updateCart')->name('update.cart');
+Route::post('/checkout', 'Client\CartController@checkout')->name('checkout');

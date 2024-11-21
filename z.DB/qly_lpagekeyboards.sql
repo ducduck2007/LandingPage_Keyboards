@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 20, 2024 lúc 11:37 AM
--- Phiên bản máy phục vụ: 10.4.24-MariaDB
+-- Thời gian đã tạo: Th10 21, 2024 lúc 02:19 AM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `best_selling` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name_product` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_price` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mo_ta` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sales` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `image` varchar(255) NOT NULL,
+  `name_product` text NOT NULL,
+  `product_price` text NOT NULL,
+  `mo_ta` text NOT NULL,
+  `sales` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -52,10 +52,10 @@ INSERT INTO `best_selling` (`id`, `image`, `name_product`, `product_price`, `mo_
 
 CREATE TABLE `carts` (
   `id` int(5) NOT NULL,
-  `name_product` text COLLATE utf8_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `price` text COLLATE utf8_unicode_ci NOT NULL,
-  `name` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'tên đăng nhập',
+  `name_product` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `price` text NOT NULL,
+  `name` text NOT NULL COMMENT 'tên đăng nhập',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -65,7 +65,8 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `name_product`, `image`, `price`, `name`, `created_at`, `updated_at`) VALUES
-(33, 'BÀN PHÍM CƠ BLACK SHARK BK-K1 ĐEN', 'uploads/673aef7e2f020-2.png', '399.000₫', 'testHome', '2024-11-20 10:20:17', '2024-11-20 10:20:17');
+(34, 'Bàn phím Corsair K95', 'uploads/673aeeb3f0a0c-1.png', '3.150.000₫', 'stupid', '2024-11-20 16:16:26', '2024-11-20 16:16:26'),
+(35, 'Bàn phím Corsair K95', 'uploads/673aeeb3f0a0c-1.png', '3.150.000₫', 'stupid', '2024-11-20 16:16:43', '2024-11-20 16:16:43');
 
 -- --------------------------------------------------------
 
@@ -75,8 +76,8 @@ INSERT INTO `carts` (`id`, `name_product`, `image`, `price`, `name`, `created_at
 
 CREATE TABLE `contact` (
   `id` int(5) NOT NULL,
-  `hinh_thuc` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `link` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `hinh_thuc` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -95,14 +96,14 @@ INSERT INTO `contact` (`id`, `hinh_thuc`, `link`) VALUES
 
 CREATE TABLE `deal_sale` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name_product` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `parameter` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `promotion` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'khuyến mãi',
-  `mo_ta` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'mô tả bảo hành',
-  `endow` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ưu đãi đặc biệt',
+  `image` varchar(255) NOT NULL,
+  `name_product` text NOT NULL,
+  `content` text NOT NULL,
+  `parameter` text NOT NULL,
+  `price` text NOT NULL,
+  `promotion` text NOT NULL COMMENT 'khuyến mãi',
+  `mo_ta` text NOT NULL COMMENT 'mô tả bảo hành',
+  `endow` text NOT NULL COMMENT 'ưu đãi đặc biệt',
   `evaluate` float NOT NULL COMMENT 'đánh giá',
   `vi_tri` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -132,10 +133,10 @@ INSERT INTO `deal_sale` (`id`, `image`, `name_product`, `content`, `parameter`, 
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -147,7 +148,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `featured_photo` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) NOT NULL,
   `vi_tri` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -167,9 +168,9 @@ INSERT INTO `featured_photo` (`id`, `image`, `vi_tri`) VALUES
 
 CREATE TABLE `header` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `image` varchar(255) NOT NULL,
+  `title` text NOT NULL,
+  `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -187,7 +188,7 @@ INSERT INTO `header` (`id`, `image`, `title`, `content`) VALUES
 
 CREATE TABLE `image_header` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -208,7 +209,7 @@ INSERT INTO `image_header` (`id`, `image`) VALUES
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -229,8 +230,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -249,10 +250,10 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 
 CREATE TABLE `phim_co` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `money` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `title` text NOT NULL,
+  `content` text NOT NULL,
+  `money` text NOT NULL,
   `vi_tri` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -264,15 +265,15 @@ CREATE TABLE `phim_co` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `name_product` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'tên sản phẩm',
-  `price` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'giá sản phẩm',
-  `promotion` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'khuyến mãi',
-  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ảnh sản phẩm',
-  `parameter` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'thông số kỹ thuật',
-  `mo_ta` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'mô tả bảo hành',
-  `endow` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'ưu đãi đặt biệt',
+  `name_product` text NOT NULL COMMENT 'tên sản phẩm',
+  `price` text NOT NULL COMMENT 'giá sản phẩm',
+  `promotion` text NOT NULL COMMENT 'khuyến mãi',
+  `image` varchar(255) NOT NULL COMMENT 'ảnh sản phẩm',
+  `parameter` text NOT NULL COMMENT 'thông số kỹ thuật',
+  `mo_ta` text NOT NULL COMMENT 'mô tả bảo hành',
+  `endow` text NOT NULL COMMENT 'ưu đãi đặt biệt',
   `evaluate` float NOT NULL COMMENT 'đánh giá',
-  `status` varchar(1) COLLATE utf8_unicode_ci NOT NULL COMMENT '1 - Đã update; 2 - Chưa update',
+  `status` varchar(1) NOT NULL COMMENT '1 - Đã update; 2 - Chưa update',
   `created_at` date NOT NULL DEFAULT current_timestamp(),
   `updated_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -295,16 +296,16 @@ INSERT INTO `products` (`id`, `name_product`, `price`, `promotion`, `image`, `pa
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `sl` int(11) NOT NULL COMMENT 'số lượng',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
-  `status` varchar(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `role` varchar(255) NOT NULL DEFAULT 'user',
+  `status` varchar(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -417,7 +418,7 @@ ALTER TABLE `best_selling`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `contact`

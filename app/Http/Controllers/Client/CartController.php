@@ -37,11 +37,47 @@ class CartController extends Controller
         
         // Lấy lại giỏ hàng của người dùng
         $giohang = DB::table('carts')
-                    ->select('name', 'name_product', DB::raw('COUNT(name_product) as quantity'), 'image')
+                    ->select('*', DB::raw('COUNT(name_product) as quantity'))
                     ->where('name', $name)
-                    ->groupBy('name', 'name_product', 'image')
                     ->get();
     
         return response()->json($giohang);
     }
+
+    public function checkout(Request $request)
+    {
+        // Lấy dữ liệu từ request
+        $name = $request->input('name');
+        $image = $request->input('image');
+        $price = $request->input('price');
+        $quantity = $request->input('quantity'); // Giá trị mới từ ô input
+    
+        DB::delete('DELETE FROM carts WHERE name = ?', [$name]);
+    
+        // Kiểm tra nếu tồn tại dữ liệu trong carts
+        // if ($cartItem) {
+        //     // Xóa dữ liệu từ bảng carts
+        //     DB::table('carts')
+        //     ->where('name', $cartItem->name) // Sử dụng id để đảm bảo xóa đúng bản ghi
+        //     ->delete();        
+    
+        //     // Thêm dữ liệu vào bảng history
+        //     DB::table('history')->insert([
+        //         'name' => $name,
+        //         'image' => $image,
+        //         'price' => $price,
+        //         'quantity' => $quantity, // Giá trị từ ô input
+        //         'status' => 1, // Gán kiểu dữ liệu = 1
+        //         'created_at' => now(),
+        //         'updated_at' => now()
+        //     ]);
+    
+        //     // Trả về phản hồi thành công
+        //     return response()->json(['success' => true, 'message' => 'Checkout completed.']);
+        // }
+    
+        // Trả về phản hồi nếu không tìm thấy dữ liệu
+        return response()->json(['success' => false, 'message' => 'Item not found in cart.']);
+    }
+    
 }

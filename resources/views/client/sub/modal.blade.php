@@ -290,28 +290,15 @@
                                             <th style="text-align: center">STT</th>
                                             <th>Tên sản phẩm</th>
                                             <th style="text-align: center">Ảnh sản phẩm</th>
+                                            <th>Giá sản phẩm</th>
                                             <th>Số lượng</th>
+                                            <th>Hành động</th>
                                         </thead>
                                         <tbody id="giohang-table">
-                                            @foreach ($giohang as $d)
-                                                <tr>
-                                                    <td style="text-align: center">{{ $d->quantity }}</td>
-                                                    <!-- Số lượng sản phẩm -->
-                                                    <td>{{ $d->name_product }}</td>
-                                                    <td style="text-align: center"><img width="100px"
-                                                            src="{{ $d->image }}" alt=""></td>
-                                                    <td>
-                                                        <div class="quantity-container">
-                                                            <input type="text" class="quantity-input" disabled
-                                                                value="{{ $d->quantity }}" min="1">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
 
                                         </tbody>
                                     </table>
-                                    <div class="containerTT">
+                                    {{-- <div class="containerTT">
                                         <div class="left-side">
                                             <div class="cardTT">
                                                 <div class="card-line"></div>
@@ -337,7 +324,7 @@
                                             </svg>
 
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -394,19 +381,59 @@
                 response.forEach(function(item) {
                     giohangContent += `
                         <tr>
-                            <td style="text-align: center">${item.quantity}</td> <!-- Số lượng -->
+                            <td style="text-align: center">${item.quantity}</td> <!-- Số lượng ban đầu -->
                             <td>${item.name_product}</td> <!-- Tên sản phẩm -->
                             <td style="text-align: center"><img width="100px" src="${item.image}" alt=""></td> <!-- Hình ảnh sản phẩm -->
+                            <td>${item.price}</td>
                             <td>
                                 <div class="quantity-container">
-                                    <input type="number" id="quantity" value="${item.quantity}" min="1">
+                                    <input type="number" class="quantity-input" value="${item.quantity}" min="1">
                                 </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-success btnThanhToan" 
+                                        data-id="{{ $item->id }}" 
+                                        data-name_product="{{ $item->name_product }}" 
+                                        data-image="{{ $item->image }}" 
+                                        data-price="{{ $item->price }}">
+                                    Thanh toán
+                                </button>
                             </td>
                         </tr>
                     `;
                 });
 
                 $('#giohang-table').html(giohangContent);
+
+                $(document).on('click', '.btnThanhToan', function() {
+                    const $row = $(this).closest('tr'); // Lấy dòng hiện tại
+                    const id = $(this).data('id'); // Lấy id từ data-id
+                    const name = $(this).data('name_product'); // Lấy name_product
+                    const image = $(this).data('image'); // Lấy image
+                    const price = $(this).data('price'); // Lấy price
+                    const quantity = $row.find('.quantity-input').val(); // Lấy số lượng mới từ input
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('checkout') }}", // Đường dẫn route
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            id: id, // Gửi thêm id
+                            name: name,
+                            image: image,
+                            price: price,
+                            quantity: quantity
+                        },
+                        success: function(response) {
+                            console.log("done");
+                            alert("Đã thêm vào giỏ hàng thành công!");
+                        },
+                        error: function(error) {
+                            console.log("that bai");
+                            alert("Có lỗi xảy ra!");
+                        }
+                    });
+                });
             }
         });
     }
