@@ -35,49 +35,72 @@ class CartController extends Controller
         
         $name = Auth::user()->name;
         
-        // Lấy lại giỏ hàng của người dùng
-        $giohang = DB::table('carts')
-                    ->select('*', DB::raw('COUNT(name_product) as quantity'))
-                    ->where('name', $name)
-                    ->get();
-    
+        // Lấy lại giỏ hàng của người dùng, tính tổng số lượng cho sản phẩm trùng tên
+        $giohang = DB::select("
+            SELECT name_product, COUNT(name_product) as quantity, id, image, price
+            FROM carts
+            WHERE `name` = :name
+            GROUP BY name_product
+        ", ['name' => $name]);
+        
         return response()->json($giohang);
     }
 
     public function checkout(Request $request)
     {
-        // Lấy dữ liệu từ request
-        $name = $request->input('name');
-        $image = $request->input('image');
+        // Lấy dữ liệu sản phẩm từ request
+        $spham_id = $request->input('id');
+        $name_product = $request->input('name_product');
         $price = $request->input('price');
-        $quantity = $request->input('quantity'); // Giá trị mới từ ô input
+        $image = $request->input('image');
+        $quantity = $request->input('quantity');  // Số lượng đến từ input của input modal
+        $name = Auth::user()->name;
+        
+        // Lấy tất cả các sản phẩm có name_product trùng trong bảng carts
+        $cartItems = DB::table('carts')->where('name', $name)->where('name_product', $name_product)->get();
+        
+        // Kiểm tra nếu có sản phẩm trong giỏ hàng
+        if ($cartItems->isNotEmpty()) {
+            // Lặp qua các sản phẩm trong giỏ hàng để insert vào bảng history_product
+            foreach ($cartItems as $cartItem) {
+                DB::table('history_product')->insert([
+                    'id' => $cartItem->id,
+                    'name_product' => $cartItem->name_product,
+                    'price' => $cartItem->price,
+                    'quantity' => $quantity,  // Sử dụng số lượng từ biến trên
+                    'image' => $cartItem->image,
+                    'name' => $cartItem->name,
+                    'status' => 1, // 1 - thành công
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+            
+            // Xóa tất cả các sản phẩm có name_product trùng trong giỏ hàng
+            $deleted = DB::table('carts')->where('name', $name)->where('name_product', $name_product)->delete();
+            
+            // Kiểm tra nếu việc xóa thành công
+            if ($deleted) {
+                return response()->json(['success' => true, 'message' => 'Items successfully removed from the cart and added to history.']);
+            } else {
+                return response()->json(['success' => false, 'message' => 'Error deleting items from cart.']);
+            }
+        } else {
+            return response()->json(['success' => false, 'message' => 'Item not found in cart.']);
+        }
+    }
+
+    public function history()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để tra cứu đơn hàng.');
+        }
     
-        DB::delete('DELETE FROM carts WHERE name = ?', [$name]);
+        $name = Auth::user()->name;
+        $data = DB::select("SELECT * FROM history_product WHERE `name` = ?", [$name]);
     
-        // Kiểm tra nếu tồn tại dữ liệu trong carts
-        // if ($cartItem) {
-        //     // Xóa dữ liệu từ bảng carts
-        //     DB::table('carts')
-        //     ->where('name', $cartItem->name) // Sử dụng id để đảm bảo xóa đúng bản ghi
-        //     ->delete();        
-    
-        //     // Thêm dữ liệu vào bảng history
-        //     DB::table('history')->insert([
-        //         'name' => $name,
-        //         'image' => $image,
-        //         'price' => $price,
-        //         'quantity' => $quantity, // Giá trị từ ô input
-        //         'status' => 1, // Gán kiểu dữ liệu = 1
-        //         'created_at' => now(),
-        //         'updated_at' => now()
-        //     ]);
-    
-        //     // Trả về phản hồi thành công
-        //     return response()->json(['success' => true, 'message' => 'Checkout completed.']);
-        // }
-    
-        // Trả về phản hồi nếu không tìm thấy dữ liệu
-        return response()->json(['success' => false, 'message' => 'Item not found in cart.']);
+        // Truyền biến $data vào view
+        return view('admin.sub.home', compact('data'));
     }
     
 }

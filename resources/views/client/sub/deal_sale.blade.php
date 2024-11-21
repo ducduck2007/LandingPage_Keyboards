@@ -314,6 +314,6 @@
             }
         });
         alert("Đã thêm vào giỏ hàng thành công!");
-        alert("Giỏ hàng sẽ cập nhật sau 10 giây");
+        // alert("Giỏ hàng sẽ cập nhật sau 10 giây");
     });
 </script>

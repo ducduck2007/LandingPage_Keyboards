@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 21, 2024 lúc 02:19 AM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Thời gian đã tạo: Th10 21, 2024 lúc 10:54 AM
+-- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `best_selling` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `name_product` text NOT NULL,
-  `product_price` text NOT NULL,
-  `mo_ta` text NOT NULL,
-  `sales` text NOT NULL
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_product` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_price` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mo_ta` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sales` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -52,21 +52,13 @@ INSERT INTO `best_selling` (`id`, `image`, `name_product`, `product_price`, `mo_
 
 CREATE TABLE `carts` (
   `id` int(5) NOT NULL,
-  `name_product` text NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `price` text NOT NULL,
-  `name` text NOT NULL COMMENT 'tên đăng nhập',
+  `name_product` text COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `price` text COLLATE utf8_unicode_ci NOT NULL,
+  `name` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'tên đăng nhập',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `carts`
---
-
-INSERT INTO `carts` (`id`, `name_product`, `image`, `price`, `name`, `created_at`, `updated_at`) VALUES
-(34, 'Bàn phím Corsair K95', 'uploads/673aeeb3f0a0c-1.png', '3.150.000₫', 'stupid', '2024-11-20 16:16:26', '2024-11-20 16:16:26'),
-(35, 'Bàn phím Corsair K95', 'uploads/673aeeb3f0a0c-1.png', '3.150.000₫', 'stupid', '2024-11-20 16:16:43', '2024-11-20 16:16:43');
 
 -- --------------------------------------------------------
 
@@ -76,8 +68,8 @@ INSERT INTO `carts` (`id`, `name_product`, `image`, `price`, `name`, `created_at
 
 CREATE TABLE `contact` (
   `id` int(5) NOT NULL,
-  `hinh_thuc` varchar(255) NOT NULL,
-  `link` varchar(255) NOT NULL
+  `hinh_thuc` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `link` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -96,14 +88,14 @@ INSERT INTO `contact` (`id`, `hinh_thuc`, `link`) VALUES
 
 CREATE TABLE `deal_sale` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `name_product` text NOT NULL,
-  `content` text NOT NULL,
-  `parameter` text NOT NULL,
-  `price` text NOT NULL,
-  `promotion` text NOT NULL COMMENT 'khuyến mãi',
-  `mo_ta` text NOT NULL COMMENT 'mô tả bảo hành',
-  `endow` text NOT NULL COMMENT 'ưu đãi đặc biệt',
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_product` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parameter` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `promotion` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'khuyến mãi',
+  `mo_ta` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'mô tả bảo hành',
+  `endow` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ưu đãi đặc biệt',
   `evaluate` float NOT NULL COMMENT 'đánh giá',
   `vi_tri` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -133,10 +125,10 @@ INSERT INTO `deal_sale` (`id`, `image`, `name_product`, `content`, `parameter`, 
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -148,7 +140,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `featured_photo` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `vi_tri` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -168,9 +160,9 @@ INSERT INTO `featured_photo` (`id`, `image`, `vi_tri`) VALUES
 
 CREATE TABLE `header` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `title` text NOT NULL,
-  `content` text NOT NULL
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -183,12 +175,37 @@ INSERT INTO `header` (`id`, `image`, `title`, `content`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `history_product`
+--
+
+CREATE TABLE `history_product` (
+  `id` int(5) NOT NULL,
+  `name_product` text COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` text COLLATE utf8_unicode_ci NOT NULL,
+  `price` text COLLATE utf8_unicode_ci NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `status` varchar(1) COLLATE utf8_unicode_ci NOT NULL COMMENT '1 - Mua hàng thành công',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `history_product`
+--
+
+INSERT INTO `history_product` (`id`, `name_product`, `image`, `name`, `price`, `quantity`, `status`, `created_at`, `updated_at`) VALUES
+(96, 'BÀN PHÍM CƠ BLACK SHARK BK-K1 ĐEN', 'uploads/673aef7e2f020-2.png', 'ducne07', '399.000₫', 3, '1', '2024-11-21 09:21:04', '2024-11-21 09:21:04');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `image_header`
 --
 
 CREATE TABLE `image_header` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) NOT NULL
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -209,7 +226,7 @@ INSERT INTO `image_header` (`id`, `image`) VALUES
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -230,8 +247,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -250,10 +267,10 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 
 CREATE TABLE `phim_co` (
   `id` int(5) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `title` text NOT NULL,
-  `content` text NOT NULL,
-  `money` text NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `money` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `vi_tri` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -265,15 +282,15 @@ CREATE TABLE `phim_co` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `name_product` text NOT NULL COMMENT 'tên sản phẩm',
-  `price` text NOT NULL COMMENT 'giá sản phẩm',
-  `promotion` text NOT NULL COMMENT 'khuyến mãi',
-  `image` varchar(255) NOT NULL COMMENT 'ảnh sản phẩm',
-  `parameter` text NOT NULL COMMENT 'thông số kỹ thuật',
-  `mo_ta` text NOT NULL COMMENT 'mô tả bảo hành',
-  `endow` text NOT NULL COMMENT 'ưu đãi đặt biệt',
+  `name_product` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'tên sản phẩm',
+  `price` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'giá sản phẩm',
+  `promotion` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'khuyến mãi',
+  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ảnh sản phẩm',
+  `parameter` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'thông số kỹ thuật',
+  `mo_ta` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'mô tả bảo hành',
+  `endow` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'ưu đãi đặt biệt',
   `evaluate` float NOT NULL COMMENT 'đánh giá',
-  `status` varchar(1) NOT NULL COMMENT '1 - Đã update; 2 - Chưa update',
+  `status` varchar(1) COLLATE utf8_unicode_ci NOT NULL COMMENT '1 - Đã update; 2 - Chưa update',
   `created_at` date NOT NULL DEFAULT current_timestamp(),
   `updated_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -296,16 +313,16 @@ INSERT INTO `products` (`id`, `name_product`, `price`, `promotion`, `image`, `pa
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sl` int(11) NOT NULL COMMENT 'số lượng',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `role` varchar(255) NOT NULL DEFAULT 'user',
-  `status` varchar(1) DEFAULT NULL
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
+  `status` varchar(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -313,13 +330,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `sl`, `created_at`, `updated_at`, `role`, `status`) VALUES
-(1, 'ducne', 'ducne@gmail.com', NULL, '$2y$10$vS9MMsOjrN1/dIPSqHN5uOXFHOmfFI5Av02UxtvuSvNWH1B7.oQ8y', NULL, 0, '2024-11-15 06:49:15', '2024-11-15 06:49:15', 'user', ''),
 (2, 'admin', 'admin@gmail.com', NULL, '$2a$12$oLnIRUOyMNLjJCp8ZinehesI1viHnqmwook.hwnY8kphy7oGCgyTS', NULL, 0, NULL, NULL, 'admin', '1'),
-(6, 'stupid', 'stupi@gmail.com', NULL, '$2y$10$xW5Eyu0XCo751ofb8AHwZu2Ac.TS3Q5AX4HjJM.KKACPcPIshwDua', NULL, 0, '2024-11-15 07:07:55', '2024-11-15 07:07:55', 'user', NULL),
-(7, 'duc_ne', 'ducdoquang207@gmail.com', NULL, '$2y$10$IRXfbWkXcRk.5JlDM79iy.MAt28WjQcPaUSF0GzC11ggep.gOPR6u', NULL, 0, '2024-11-15 07:21:21', '2024-11-15 07:21:21', 'user', NULL),
-(8, 'ngCuong', 'stupid@gmail.com', NULL, '$2y$10$wlHcythZpjiE/59aI5vQ3Ooghubk7NyvOwtQ6bWOERsMXFo8YH4y6', NULL, 0, '2024-11-15 11:09:45', '2024-11-15 11:09:45', 'user', NULL),
-(9, 'testHome', 'test1@gmail.com', NULL, '$2y$10$vvgYSbjYow2qfj9z.SWMcuQFdOhxST8LVu5v5/S2O2Wj52vdlNSHy', NULL, 0, '2024-11-16 10:57:16', '2024-11-16 10:57:16', 'user', NULL),
-(10, 'test2', 'test2@gmail.com', NULL, '$2y$10$z7EROFr51hOgB18JF9YNaebiTztg7ok4tT9OhqKuKI0zC82uMUjum', NULL, 0, '2024-11-16 15:17:20', '2024-11-16 15:17:20', 'user', NULL);
+(11, 'ducne07', 'ducne@gmail.com', NULL, '$2y$10$Bcv7KzroXh8o6NxDPRTKNeJWL3oC6OiqvkLBLd801Fu/yCJLZXWB2', NULL, 0, '2024-11-21 09:20:34', '2024-11-21 09:20:34', 'user', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -365,6 +377,12 @@ ALTER TABLE `featured_photo`
 -- Chỉ mục cho bảng `header`
 --
 ALTER TABLE `header`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `history_product`
+--
+ALTER TABLE `history_product`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -418,7 +436,7 @@ ALTER TABLE `best_selling`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT cho bảng `contact`
@@ -451,6 +469,12 @@ ALTER TABLE `header`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT cho bảng `history_product`
+--
+ALTER TABLE `history_product`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+
+--
 -- AUTO_INCREMENT cho bảng `image_header`
 --
 ALTER TABLE `image_header`
@@ -478,7 +502,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

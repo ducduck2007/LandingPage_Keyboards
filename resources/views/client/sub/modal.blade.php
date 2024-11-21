@@ -47,7 +47,17 @@
                         </div>
 
                     </div>
-                    <button type="button" class="btn btn-danger mt-3 p-5 pt-2 pb-2 fs-4">MUA NGAY</button>
+
+                    <div class="mt-3" id="toltoptips">
+                        <div class="wrapper">
+                            <input type="checkbox" />
+                            <div class="btn"></div>
+                            <div class="tooltip"><svg></svg><span>Thượng kế muốn mua sản phẩm có thể tìm kiếm hoặc tìm ở các phần bên dưới ạ</span></div>
+                            <svg></svg>
+                        </div>
+
+                    </div>
+
                     <div class="col-12 mt-3">
                         <li>Bảo hành chính hãng 12 tháng</li>
                         <li>Hỗ trợ đổi mới trong 7 ngày</li>
@@ -235,48 +245,6 @@
             <div class="modal-body container d-flex justify-content-start align-items-center flex-column">
                 <i class="fa-solid fa-bag-shopping"
                     style="position: absolute;right: 15px;font-size: 32px;rotate: 15deg;"></i>
-
-                {{-- <div class="col-9 d-flex align-items-start mt-2 gap-4 gioHang">
-                    <div class="aside col-2">
-                        <img src="{{ $header[0]->image }}" alt="" class="col-12">
-                    </div>
-                    <div class="article ps-4 col-10 position-relative">
-                        <div class="col-12 fw-bold fs-5">{{ $header[0]->title }}</div>
-                        <div class="col-12 fs-6">Mô tả</div>
-                        <div class="col-12 fs-6 text-danger mt-1 fw-bold">32.990.000₫</div>
-
-                        <div class="containerTT mt-2">
-                            <div class="left-side">
-                                <div class="cardTT">
-                                    <div class="card-line"></div>
-                                    <div class="buttons"></div>
-                                </div>
-                                <div class="post">
-                                    <div class="post-line"></div>
-                                    <div class="screen">
-                                        <div class="dollar">$</div>
-                                    </div>
-                                    <div class="numbers"></div>
-                                    <div class="numbers-line2"></div>
-                                </div>
-                            </div>
-                            <div class="right-side">
-                                <div class="new">Thanh toán</div>
-
-                                <svg viewBox="0 0 451.846 451.847" height="512" width="512"
-                                    xmlns="http://www.w3.org/2000/svg" class="arrow">
-                                    <path fill="#cfcfcf" data-old_color="#000000" class="active-path"
-                                        data-original="#000000"
-                                        d="M345.441 248.292L151.154 442.573c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744L278.318 225.92 106.409 54.017c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.287 194.284c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373z">
-                                    </path>
-                                </svg>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div> --}}
-
                 <div class="container-fluid col-11 mt-4">
                     <div class=" table-page col-lg-12">
                         <div class="card">
@@ -284,14 +252,15 @@
                                 <p>GIỎ HÀNG</p>
                                 <div class="table-responsive">
                                     <table class="table-user table table-striped table-bordered table-hover"
-                                        id="example" class="display" style="width:100%">
+                                        id="tbl-gioHang" class="display" style="width:100%">
                                         <!-- STT	UserID	Server	Question	Answer	Time	Status	Reply -->
                                         <thead>
-                                            <th style="text-align: center">STT</th>
+                                            <th style="text-align: center">ID</th>
                                             <th>Tên sản phẩm</th>
                                             <th style="text-align: center">Ảnh sản phẩm</th>
                                             <th>Giá sản phẩm</th>
                                             <th>Số lượng</th>
+                                            <th>Tổng tiền</th>
                                             <th>Hành động</th>
                                         </thead>
                                         <tbody id="giohang-table">
@@ -335,6 +304,7 @@
         </div>
     </div>
 </div>
+
 <script>
     document.querySelectorAll('.buy-now').forEach(button => {
         button.addEventListener('click', function() {
@@ -361,10 +331,11 @@
                 }
             });
             alert("Đã thêm vào giỏ hàng thành công!");
-            alert("Giỏ hàng sẽ cập nhật sau 10 giây");
+            // alert("Giỏ hàng sẽ cập nhật sau 10 giây");
         });
     });
 </script>
+
 <script>
     // Hàm để load lại giỏ hàng
     function loadCart() {
@@ -372,30 +343,41 @@
             url: "{{ route('update.cart') }}", // Đường dẫn tới route AJAX
             method: "GET",
             success: function(response) {
-                if (response.length === 0) {
-                    return; // Nếu không có giỏ hàng, không làm gì
-                }
-
                 let giohangContent = '';
 
+                // Nếu giỏ hàng không trống, render nội dung
                 response.forEach(function(item) {
+                    const rawPrice = item.price ||
+                        "0"; // Lấy giá trị price hoặc gán mặc định là "0"
+                    const cleanedPrice = Number(rawPrice.replace(/[^\d]/g,
+                        "")); // Loại bỏ ký tự không phải số
+                    const quantity = Number(item.quantity || 0); // Chuyển quantity thành số
+
                     giohangContent += `
                         <tr>
-                            <td style="text-align: center">${item.quantity}</td> <!-- Số lượng ban đầu -->
-                            <td>${item.name_product}</td> <!-- Tên sản phẩm -->
-                            <td style="text-align: center"><img width="100px" src="${item.image}" alt=""></td> <!-- Hình ảnh sản phẩm -->
-                            <td>${item.price}</td>
+                            <td style="text-align: center">${item.id ?? ''}</td> <!-- ID -->
+                            <td>${item.name_product ?? ''}</td> <!-- Tên sản phẩm -->
+                            <td style="text-align: center">
+                                <img width="100px" src="${item.image || ''}">
+                            </td> <!-- Hình ảnh sản phẩm -->
+                            <td>${rawPrice}</td> <!-- Giá sản phẩm hiển thị -->
                             <td>
                                 <div class="quantity-container">
-                                    <input type="number" class="quantity-input" value="${item.quantity}" min="1">
+                                    <input 
+                                        type="number" 
+                                        class="quantity-input" 
+                                        min="1" 
+                                        value="${quantity}" 
+                                        data-price="${cleanedPrice}" 
+                                        data-id="${item.id}"
+                                        ${!quantity ? 'disabled' : ''}>
                                 </div>
                             </td>
+                            <td class="total-price">${(quantity * cleanedPrice).toLocaleString()} VND</td> <!-- Tổng giá trị -->
                             <td>
-                                <button class="btn btn-success btnThanhToan" 
-                                        data-id="{{ $item->id }}" 
-                                        data-name_product="{{ $item->name_product }}" 
-                                        data-image="{{ $item->image }}" 
-                                        data-price="{{ $item->price }}">
+                                <button 
+                                    class="btn btn-success btnThanhToan" 
+                                    ${!item.name_product ? 'disabled' : ''}>
                                     Thanh toán
                                 </button>
                             </td>
@@ -403,41 +385,135 @@
                     `;
                 });
 
+                // Cập nhật bảng
                 $('#giohang-table').html(giohangContent);
 
-                $(document).on('click', '.btnThanhToan', function() {
-                    const $row = $(this).closest('tr'); // Lấy dòng hiện tại
-                    const id = $(this).data('id'); // Lấy id từ data-id
-                    const name = $(this).data('name_product'); // Lấy name_product
-                    const image = $(this).data('image'); // Lấy image
-                    const price = $(this).data('price'); // Lấy price
-                    const quantity = $row.find('.quantity-input').val(); // Lấy số lượng mới từ input
+                // Xử lý sự kiện thay đổi số lượng
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('input', function() {
+                        const newQuantity = Number(this.value || 0); // Lấy số lượng mới
+                        const price = Number(this.dataset.price ||
+                            0); // Lấy giá từ thuộc tính data-price
+                        const totalPriceCell = this.closest('tr').querySelector(
+                            '.total-price'); // Lấy ô tổng tiền
 
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('checkout') }}", // Đường dẫn route
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            id: id, // Gửi thêm id
-                            name: name,
-                            image: image,
-                            price: price,
-                            quantity: quantity
-                        },
-                        success: function(response) {
-                            console.log("done");
-                            alert("Đã thêm vào giỏ hàng thành công!");
-                        },
-                        error: function(error) {
-                            console.log("that bai");
-                            alert("Có lỗi xảy ra!");
-                        }
+                        // Cập nhật tổng tiền
+                        totalPriceCell.textContent = (newQuantity * price)
+                            .toLocaleString() + " VND";
                     });
                 });
+
+                // Thêm sự kiện cho các button "Thanh toán"
+                document.querySelectorAll('.btnThanhToan').forEach((button) => {
+                    button.addEventListener('click', function() {
+                        const row = button.closest('tr'); // Lấy hàng hiện tại
+                        const id = row.querySelector('td:nth-child(1)')
+                            .textContent; // ID sản phẩm
+                        const nameProduct = row.querySelector('td:nth-child(2)')
+                            .textContent; // Tên sản phẩm
+                        const image = row.querySelector('td:nth-child(3) img')
+                            .src; // Ảnh sản phẩm
+                        const price = row.querySelector('td:nth-child(4)')
+                            .textContent; // Giá sản phẩm
+                        const quantity = row.querySelector('.quantity-input')
+                            .value; // Số lượng
+
+                        // Gửi yêu cầu AJAX để thanh toán
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('checkout') }}", // URL cho route
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: id,
+                                name_product: nameProduct, // gửi tên sản phẩm
+                                image: image,
+                                price: price,
+                                quantity: quantity
+                            },
+                            success: function(response) {
+                                console.log("Đã thanh toán thành công:",
+                                    response);
+                                alert("Đơn hàng đã được đặt thành công!");
+                            },
+                            error: function(error) {
+                                console.error("Lỗi khi thanh toán:", error);
+                                alert("Có lỗi xảy ra khi thanh toán!");
+                            }
+                        });
+                    });
+                });
+            },
+            error: function(error) {
+                console.error("Không thể tải giỏ hàng:", error);
             }
         });
     }
 
+    // Gọi hàm loadCart ban đầu và sau mỗi 10 giây
     setInterval(loadCart, 10000);
     loadCart();
 </script>
+
+<!-- Modal tra cứu đơn hàng -->
+<div class="modal fade" id="exampleModalTraCuuDonHang" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header container">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body container d-flex justify-content-start align-items-center flex-column">
+                <i class="fa-solid fa-bag-shopping"
+                    style="position: absolute;right: 15px;font-size: 32px;rotate: 15deg;"></i>
+
+                <div class="container-fluid col-11 mt-4">
+                    <div class=" table-page col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <p>Lịch sử đơn hàng</p>
+                                <div class="table-responsive">
+                                    <table class="table-user table table-striped table-bordered table-hover"
+                                        id="tbl-gioHang" class="display" style="width:100%">
+                                        <!-- STT	UserID	Server	Question	Answer	Time	Status	Reply -->
+                                        <thead>
+                                            <th style="text-align: center">ID</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th style="text-align: center">Ảnh sản phẩm</th>
+                                            <th style="text-align: center">Giá sản phẩm</th>
+                                            <th style="text-align: center">Số lượng</th>
+                                            <th style="text-align: center">Thời gian</th>
+                                            <th style="text-align: center">Trạng thái</th>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($history_product as $d)
+                                                <tr>
+                                                    <td style="text-align: center">{{ $d->id }}</td>
+                                                    <td>{{ $d->name_product }}</td>
+                                                    <td style="text-align: center"><img src="{{ $d->image }}"
+                                                            alt="Ảnh sản phẩm" width="100px"></td>
+                                                    <td style="text-align: center">{{ $d->price }}</td>
+                                                    <td style="text-align: center">{{ $d->soLuong }}</td>
+                                                    <td style="text-align: center">{{ $d->updated_at }}</td>
+                                                    <td style="text-align: center">
+                                                        @if ($d->status == 1)
+                                                            <span class="text-danger">Đang chờ xử lý</span>
+                                                        @else
+                                                            Hoàn tất
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <p class="fw-bold">- Thanh toán khi nhận được hàng</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

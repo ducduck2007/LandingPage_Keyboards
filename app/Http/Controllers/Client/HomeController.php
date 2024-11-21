@@ -54,8 +54,14 @@ class HomeController extends Controller
         $featured_photo = DB::select("SELECT * FROM featured_photo");
         $products = DB::select("SELECT * FROM products");
         $contact = DB::select("SELECT * FROM contact");
+        $history_product = DB::select("
+        SELECT *, quantity as soLuong 
+        FROM history_product 
+        WHERE `name` = ?
+        GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s'), name_product 
+        ", [$name]);
     
-        return view('client.home', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo', 'products', 'contact', 'giohang', 'name'));
+        return view('client.home', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo', 'products', 'contact', 'giohang', 'name', 'history_product'));
     }
     
 }

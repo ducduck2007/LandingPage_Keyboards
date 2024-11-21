@@ -43,14 +43,19 @@
                 @endforeach
             </li>
 
-            <li class="d-flex align-items-center gap-2">
+            <li class="d-flex align-items-center gap-2" onclick="reloadAndOpenModal()">
                 <i class="fas fa-box-open icon"></i>
-                <a href="#" class="text-light textNav">Lịch sử <br>đặt hàng</a>
+                <span class="text-light textNav">Lịch sử <br>đặt hàng</span>
             </li>
 
-            <li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#exampleModalGioHang">
+            {{-- <li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#exampleModalGioHang">
                 <i class="fa-solid fa-cart-shopping icon"></i>
-                <a href="#" class="text-light textNav">Giỏ <br>hàng</a>
+                <span class="text-light textNav">Giỏ <br>hàng</span>
+            </li> --}}
+
+            <li class="d-flex align-items-center gap-2" onclick="openModal()">
+                <i class="fa-solid fa-cart-shopping icon"></i>
+                <span class="text-light textNav">Giỏ <br>hàng</span>
             </li>
 
             <div class="btn-group">
@@ -85,6 +90,41 @@
     </nav>
 </header>
 
+<!-- Modal thông tin giỏ hàng -->
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartModalLabel">Thông tin giỏ hàng</h5>
+            </div>
+            <div class="modal-body">
+                <form id="cartForm" onsubmit="return validateForm()">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Họ và tên</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Số điện thoại</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="cartForm" class="btn btn-primary">Xác nhận hoặc thay đổi thông
+                    tin</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         $('#user_id').select2();
@@ -102,6 +142,55 @@
             $('#exampleModalSearch').modal('show');
         });
     });
+
+    function openModal() {
+        // Mở modal đầu tiên
+        var myModal = new bootstrap.Modal(document.getElementById('cartModal'));
+        myModal.show();
+    }
+
+    function validateForm() {
+        // Lấy các giá trị trong form
+        var fullName = document.getElementById('fullName').value;
+        var phone = document.getElementById('phone').value;
+        var address = document.getElementById('address').value;
+        var email = document.getElementById('email').value;
+
+        // Kiểm tra nếu các trường bị bỏ trống
+        if (!fullName || !phone || !address || !email) {
+            alert('Vui lòng điền đầy đủ thông tin!');
+            return false;
+        }
+
+        // Nếu form hợp lệ, mở modal thứ hai
+        var cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
+        cartModal.hide();
+
+        var nextModal = new bootstrap.Modal(document.getElementById('exampleModalGioHang'));
+        nextModal.show();
+
+        return false;
+    }
+
+    function reloadAndOpenModal() {
+        // Lưu trạng thái mở modal vào sessionStorage
+        sessionStorage.setItem('openModal', 'true');
+
+        // Reload trang
+        location.reload();
+    }
+
+    window.onload = function() {
+        // Kiểm tra nếu trạng thái modal là 'true'
+        if (sessionStorage.getItem('openModal') === 'true') {
+            // Mở modal sau khi trang tải lại
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModalTraCuuDonHang'));
+            myModal.show();
+
+            // Xóa trạng thái sau khi đã mở modal
+            sessionStorage.removeItem('openModal');
+        }
+    };
 </script>
 <style>
     .select2-selection__arrow {

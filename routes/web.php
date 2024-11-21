@@ -30,3 +30,4 @@ Route::post('register', 'Client\Auth\RegisterController@register');
 Route::post('/add-to-cart', 'Client\CartController@addToCart')->name('cart.add');
 Route::get('/update-cart', 'Client\CartController@updateCart')->name('update.cart');
 Route::post('/checkout', 'Client\CartController@checkout')->name('checkout');
+Route::get('history-product', 'Client\CartController@history')->name('history');

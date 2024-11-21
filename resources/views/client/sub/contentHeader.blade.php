@@ -141,8 +141,16 @@
                                     </div>
 
                                 </div>
-                                <button type="button" class="btn btn-danger mt-3 p-5 pt-2 pb-2 fs-4">MUA
-                                    NGAY</button>
+                                <div class="mt-3" id="toltoptips">
+                                    <div class="wrapper">
+                                        <input type="checkbox" />
+                                        <div class="btn"></div>
+                                        <div class="tooltip"><svg></svg><span>Thượng kế muốn mua sản phẩm có thể tìm
+                                                kiếm hoặc tìm ở các phần bên dưới ạ</span></div>
+                                        <svg></svg>
+                                    </div>
+
+                                </div>
                                 <div class="col-12 mt-3">
                                     <li>Bảo hành chính hãng 12 tháng</li>
                                     <li>Hỗ trợ đổi mới trong 7 ngày</li>
