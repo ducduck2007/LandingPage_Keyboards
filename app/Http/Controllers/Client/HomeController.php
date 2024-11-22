@@ -39,14 +39,12 @@ class HomeController extends Controller
         
         $name = Auth::user()->name; // Lấy tên người dùng
         
-        // Truy vấn đếm số lượng sản phẩm trong giỏ hàng cho mỗi sản phẩm
         $giohang = DB::table('carts')
                     ->select('name_product', DB::raw('COUNT(name_product) as quantity'), 'image')
                     ->where('name', $name)
                     ->groupBy('name_product', 'image')
                     ->get();
     
-        // Các truy vấn khác
         $deal_sale = DB::select("SELECT * FROM deal_sale");
         $header = DB::select("SELECT * FROM header");
         $image_header = DB::select("SELECT * FROM image_header");
@@ -54,11 +52,14 @@ class HomeController extends Controller
         $featured_photo = DB::select("SELECT * FROM featured_photo");
         $products = DB::select("SELECT * FROM products");
         $contact = DB::select("SELECT * FROM contact");
+
         $history_product = DB::select("
-        SELECT *, quantity as soLuong 
-        FROM history_product 
+        SELECT 
+            *, 
+            SUM(REPLACE(REPLACE(price, '.', ''), '₫', '') * quantity) AS ThanhTien
+        FROM history_product
         WHERE `name` = ?
-        GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s'), name_product 
+        GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s'), name_product;
         ", [$name]);
     
         return view('client.home', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo', 'products', 'contact', 'giohang', 'name', 'history_product'));

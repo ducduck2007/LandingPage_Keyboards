@@ -52,7 +52,8 @@
                         <div class="wrapper">
                             <input type="checkbox" />
                             <div class="btn"></div>
-                            <div class="tooltip"><svg></svg><span>Thượng kế muốn mua sản phẩm có thể tìm kiếm hoặc tìm ở các phần bên dưới ạ</span></div>
+                            <div class="tooltip"><svg></svg><span>Thượng kế muốn mua sản phẩm có thể tìm kiếm hoặc tìm ở
+                                    các phần bên dưới ạ</span></div>
                             <svg></svg>
                         </div>
 
@@ -373,7 +374,7 @@
                                         ${!quantity ? 'disabled' : ''}>
                                 </div>
                             </td>
-                            <td class="total-price">${(quantity * cleanedPrice).toLocaleString()} VND</td> <!-- Tổng giá trị -->
+                            <td class="total-price">${(quantity * cleanedPrice).toLocaleString()} ₫</td> <!-- Tổng giá trị -->
                             <td>
                                 <button 
                                     class="btn btn-success btnThanhToan" 
@@ -482,6 +483,7 @@
                                             <th style="text-align: center">Ảnh sản phẩm</th>
                                             <th style="text-align: center">Giá sản phẩm</th>
                                             <th style="text-align: center">Số lượng</th>
+                                            <th style="text-align: center">Tổng tiền</th>
                                             <th style="text-align: center">Thời gian</th>
                                             <th style="text-align: center">Trạng thái</th>
                                         </thead>
@@ -493,11 +495,12 @@
                                                     <td style="text-align: center"><img src="{{ $d->image }}"
                                                             alt="Ảnh sản phẩm" width="100px"></td>
                                                     <td style="text-align: center">{{ $d->price }}</td>
-                                                    <td style="text-align: center">{{ $d->soLuong }}</td>
+                                                    <td style="text-align: center">{{ $d->quantity }}</td>
+                                                    <td style="text-align: center">{{ $d->ThanhTien }}₫</td>
                                                     <td style="text-align: center">{{ $d->updated_at }}</td>
                                                     <td style="text-align: center">
                                                         @if ($d->status == 1)
-                                                            <span class="text-danger">Đang chờ xử lý</span>
+                                                            <span class="text-danger">Đang xử lý</span>
                                                         @else
                                                             Hoàn tất
                                                         @endif
