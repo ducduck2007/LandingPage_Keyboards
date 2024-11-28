@@ -30,6 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/update-cart', 'Client\CartController@updateCart')->name('update.cart');
     Route::post('/checkout', 'Client\CartController@checkout')->name('checkout');
     Route::get('history-product', 'Client\CartController@history')->name('history');
-    
+
     Route::get('/cart/count', 'Client\HomeController@getCartCount')->name('cart.count');
 });
