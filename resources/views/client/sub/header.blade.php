@@ -53,11 +53,15 @@
                 <span class="text-light textNav">Giỏ <br>hàng</span>
             </li> --}}
 
-            <li class="d-flex align-items-center gap-2" onclick="openModal()">
+            <li class="d-flex align-items-center gap-2 position-relative" onclick="openModal()">
                 <i class="fa-solid fa-cart-shopping icon"></i>
                 <span class="text-light textNav">Giỏ <br>hàng</span>
+                <div class="sl_donHang text-dark fw-bold position-absolute bg-warning rounded-circle d-flex align-items-center justify-content-center"
+                    style="width: 25px; height: 25px; right: -22%; top: -5%;">
+                    0
+                </div>
             </li>
-
+            
             <div class="btn-group">
                 @if (Auth::check() && Auth::user()->role == 'user')
                     <!-- Kiểm tra nếu người dùng đã đăng nhập và có role là 'user' -->
@@ -232,3 +236,23 @@
         color: #000;
     }
 </style>
+<script>
+    function updateCartCount() {
+        $.ajax({
+            url: '{{ route('cart.count') }}',
+            method: 'GET',
+            success: function(response) {
+                $('.sl_donHang').text(response.count);
+            },
+            error: function() {
+                console.error('Không thể tải số lượng giỏ hàng.');
+            }
+        });
+    }
+
+    // Gọi hàm cập nhật mỗi 5 giây hoặc tùy chỉnh theo nhu cầu.
+    setInterval(updateCartCount, 5000);
+
+    // Gọi ngay khi trang load
+    updateCartCount();
+</script>
