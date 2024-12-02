@@ -67,9 +67,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nội dung</label>
+                            <label class="col-sm-2 col-form-label">Mô tả ngắn</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="content" placeholder="Nội dung" rows="3" cols="10">{{ old('content', $model->content) }}</textarea>
+                                <textarea class="form-control" name="content" placeholder="Mô tả ngắn" rows="3" cols="10">{{ old('content', $model->content) }}</textarea>
                             </div>
                         </div>
 

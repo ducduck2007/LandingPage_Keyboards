@@ -48,8 +48,9 @@
                         @if ($ds->vi_tri == 1)
                             <div class="card item" style="height: 400px; border-radius: 4px;">
                                 <img src="{{ $ds->image }}" class="card-img-top" alt="..."
-                                    style="height: 50%; object-fit: cover;">
-                                <div class="card-body d-flex flex-column justify-content-between gap-2">
+                                    style="height: 40%; object-fit: cover;">
+                                <div class="card-body d-flex flex-column justify-content-between gap-2"
+                                    style="height: 60%; overflow-y: auto">
                                     <h5 class="card-title mb-0" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalPanel"
                                         onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->name_product }}
@@ -84,8 +85,9 @@
                         @if ($ds->vi_tri == 2)
                             <div class="card item" style="height: 400px; border-radius: 4px;">
                                 <img src="{{ $ds->image }}" class="card-img-top" alt="..."
-                                    style="height: 50%; object-fit: cover;">
-                                <div class="card-body d-flex flex-column justify-content-between gap-2">
+                                    style="height: 40%; object-fit: cover;">
+                                <div class="card-body d-flex flex-column justify-content-between gap-2"
+                                    style="height: 60%; overflow-y: auto">
                                     <h5 class="card-title mb-0" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalPanel"
                                         onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->name_product }}
@@ -121,8 +123,9 @@
                         @if ($ds->vi_tri == 3)
                             <div class="card item" style="height: 400px; border-radius: 4px;">
                                 <img src="{{ $ds->image }}" class="card-img-top" alt="..."
-                                    style="height: 50%; object-fit: cover;">
-                                <div class="card-body d-flex flex-column justify-content-between gap-2">
+                                    style="height: 40%; object-fit: cover;">
+                                <div class="card-body d-flex flex-column justify-content-between gap-2"
+                                    style="height: 60%; overflow-y: auto">
                                     <h5 class="card-title mb-0" data-bs-toggle="modal"
                                         data-bs-target="#exampleModalPanel"
                                         onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->name_product }}
