@@ -141,6 +141,7 @@
             $('#table-games').dataTable({
                 'order': [],
                 "scrollX": true,
+                "pageLength": 5, // Mặc định hiển thị 25 dòng
                 "footerCallback": function(row, data, start, end, display) {
                     $('.count').text(this.api().page.info().recordsTotal);
                 }
