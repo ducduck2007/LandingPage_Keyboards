@@ -70,14 +70,24 @@
                         </form>
                     </ul>
                 @else
-                    <a href="{{ route('client.login') }}" type="button" class="btn btn-danger">Đăng nhập</a>
-                    <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('client.register') }}">Đăng ký</a></li>
-                    </ul>
+                    <div id="buttons-auth">
+                        <button type="button" class="btn">
+                            <strong>LOGIN/REGISTER</strong>
+                            <div id="container-stars">
+                                <div id="stars"></div>
+                            </div>
+
+                            <div id="glow">
+                                <div class="circle"></div>
+                                <div class="circle"></div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div id="fromLoginRegister" class="d-flex flex-column">
+                        <a href="{{ route('client.login') }}">Login</a>
+                        <a href="{{ route('client.register') }}">Register</a>
+                    </div>
                 @endif
             </div>
 
@@ -94,52 +104,23 @@
             const name = selectedOption.data('name');
             const description = selectedOption.data('description');
 
-            // Gán dữ liệu vào modal
             $('#productName').text(`Tên sản phẩm: ${name}`);
             $('#productDescription').text(`Mô tả: ${description}`);
 
-            // Hiển thị modal
             $('#exampleModalSearch').modal('show');
         });
     });
+
+    const buttonAuth = document.getElementById('buttons-auth');
+    const fromLoginRegister = document.getElementById('fromLoginRegister');
+    let isOpen = false;
+
+    buttonAuth.addEventListener('click', () => {
+        if (isOpen) {
+            fromLoginRegister.style.right = '';
+        } else {
+            fromLoginRegister.style.right = '10%';
+        }
+        isOpen = !isOpen;
+    });
 </script>
-<style>
-    .select2-selection__arrow {
-        display: none;
-    }
-
-    .select2-container--default .select2-selection--single {
-        background: none !important;
-        padding: 22px 0;
-    }
-
-    .ui-input-icon svg {
-        margin-bottom: 0;
-    }
-
-    .select2-container .select2-selection--single .select2-selection__rendered {
-        padding-left: 38px;
-        padding-top: 0;
-        margin-top: -12px;
-        color: #fff;
-    }
-
-    .btnSearch {
-        outline: none;
-        background: none;
-        border-radius: 4px;
-        color: #fff;
-        padding: 10px 35px;
-        border: 2px solid #ccc;
-        margin-left: 1rem;
-        cursor: pointer;
-        font-weight: 600;
-        transition: 0.3s ease;
-    }
-
-    .btnSearch:hover {
-        background: #fff;
-        border: 2px solid #fff;
-        color: #000;
-    }
-</style>

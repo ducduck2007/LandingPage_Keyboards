@@ -81,3 +81,12 @@ Route::group(['prefix' => 'contact', 'middleware' => ['admin']], function () {
     Route::post('post-create', 'Admin\ContactController@postCreate')->name('contact.postCreate');
     Route::post('delete', 'Admin\ContactController@delete')->name('contact.delete');
 });
+
+Route::group(['prefix' => 'time_sale', 'middleware' => ['admin']], function () {
+    Route::get('index', 'Admin\TimesaleController@index')->name('time_sale.index');
+    Route::get('update/{id}', 'Admin\TimesaleController@update')->name('time_sale.update');
+    Route::post('post-update', 'Admin\TimesaleController@postUpdate')->name('time_sale.postUpdate');
+    Route::get('create', 'Admin\TimesaleController@create')->name('time_sale.create');
+    Route::post('post-create', 'Admin\TimesaleController@postCreate')->name('time_sale.postCreate');
+    Route::post('delete', 'Admin\TimesaleController@delete')->name('time_sale.delete');
+});

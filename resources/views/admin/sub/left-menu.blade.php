@@ -34,6 +34,9 @@
                         $routeName == 'featured_photo.create') class='mm-active' @endif><a
                         href="{{ route('featured_photo.index') }}" class="waves-effect"><span>Ảnh nổi bật</span></a>
                 </li>
+                <li @if ($routeName == 'time_sale.index' || $routeName == 'time_sale.update' || $routeName == 'time_sale.create') class='mm-active' @endif><a href="{{ route('time_sale.index') }}"
+                        class="waves-effect"><span>Cài đặt thời gian sale</span></a>
+                </li>
             </ul>
         </li>
 

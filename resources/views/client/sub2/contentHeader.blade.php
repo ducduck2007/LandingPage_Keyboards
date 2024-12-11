@@ -58,7 +58,7 @@
             <div class="cardSP col-12">
                 <div class="upper-part">
                     <div class="upper-part-face">
-                        <img src="assets/images/demo.png" width="100%" height="100%" alt="...">
+                        <img src="{{ $bs->image }}" width="100%" height="100%" alt="...">
                     </div>
                     <div class="upper-part-back pe-3 ps-3" style="font-size: 14px;">{{ $bs->mo_ta }}</div>
                 </div>

@@ -27,8 +27,9 @@ class HomeController extends Controller
         $featured_photo = DB::select("SELECT * FROM featured_photo");
         $products = DB::select("SELECT * FROM products");
         $contact = DB::select("SELECT * FROM contact");
+        $time_sale = DB::select("SELECT * FROM timeSale");
 
-        return view('client.home2', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo', 'products', 'contact'));
+        return view('client.home2', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo', 'products', 'contact', 'time_sale'));
     }
 
     public function index2()
@@ -52,6 +53,7 @@ class HomeController extends Controller
         $featured_photo = DB::select("SELECT * FROM featured_photo");
         $products = DB::select("SELECT * FROM products");
         $contact = DB::select("SELECT * FROM contact");
+        $time_sale = DB::select("SELECT * FROM timeSale");
 
         $history_product = DB::select("
         SELECT 
@@ -62,7 +64,7 @@ class HomeController extends Controller
         GROUP BY DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s'), name_product;
         ", [$name]);
     
-        return view('client.home', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo', 'products', 'contact', 'giohang', 'name', 'history_product'));
+        return view('client.home', compact('deal_sale', 'header', 'image_header', 'best_selling', 'featured_photo', 'products', 'contact', 'giohang', 'name', 'history_product', 'time_sale'));
     }
 
     public function getCartCount()

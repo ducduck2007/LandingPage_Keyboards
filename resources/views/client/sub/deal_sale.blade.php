@@ -1,13 +1,19 @@
 <div class="container-fluid col-11 mt-5" id="scrollDealsale">
     <div class="col-12 bg001">
         <div class="d-flex align-items-center p-2 ps-3 gap-2">
-            <div class="time p-2 pe-3 ps-3 bg-light fw-bold">01</div>
-            <div class="fs-4 fw-bold text-light">:</div>
-            <div class="time p-2 pe-3 ps-3 bg-light fw-bold">14</div>
-            <div class="fs-4 fw-bold text-light">:</div>
-            <div class="time p-2 pe-3 ps-3 bg-light fw-bold">32</div>
-            <div class="fs-4 fw-bold text-light">:</div>
-            <div class="time p-2 pe-3 ps-3 bg-light fw-bold">36</div>
+            @foreach ($time_sale as $ts)
+                @php
+                    // Kiểm tra và chuyển đổi $ts->time thành đối tượng Carbon nếu là chuỗi
+                    $time = is_string($ts->time) ? \Carbon\Carbon::parse($ts->time) : $ts->time;
+                @endphp
+                <div class="time p-2 pe-3 ps-3 bg-light fw-bold" id="day">{{ $time->format('d') }}</div>
+                <div class="fs-4 fw-bold text-light">:</div>
+                <div class="time p-2 pe-3 ps-3 bg-light fw-bold" id="hour">{{ $time->format('H') }}</div>
+                <div class="fs-4 fw-bold text-light">:</div>
+                <div class="time p-2 pe-3 ps-3 bg-light fw-bold" id="minute">{{ $time->format('i') }}</div>
+                <div class="fs-4 fw-bold text-light">:</div>
+                <div class="time p-2 pe-3 ps-3 bg-light fw-bold" id="second">{{ $time->format('s') }}</div>
+            @endforeach
 
             <i class="fa-solid fa-bolt-lightning fs-2 ms-5 mb-2"
                 style="background: -webkit-linear-gradient(#eee, #333);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i>
@@ -234,6 +240,42 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const targetDate = new Date("{{ $ts->time }}");
+
+        const dayElement = document.getElementById("day");
+        const hourElement = document.getElementById("hour");
+        const minuteElement = document.getElementById("minute");
+        const secondElement = document.getElementById("second");
+
+        const scrollDealsaleElement = document.getElementById("scrollDealsale");
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeRemaining = targetDate - now;
+
+            if (timeRemaining <= 0) {
+                if (scrollDealsaleElement) {
+                    scrollDealsaleElement.style.display = "none";
+                }
+                return;
+            }
+
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            dayElement.textContent = String(days).padStart(2, '0');
+            hourElement.textContent = String(hours).padStart(2, '0');
+            minuteElement.textContent = String(minutes).padStart(2, '0');
+            secondElement.textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+    });
+</script>
 <script>
     const tabs = document.querySelectorAll('.panel');
     const contents = [

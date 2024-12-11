@@ -48,11 +48,6 @@
                 <span class="text-light textNav">Lịch sử <br>đặt hàng</span>
             </li>
 
-            {{-- <li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#exampleModalGioHang">
-                <i class="fa-solid fa-cart-shopping icon"></i>
-                <span class="text-light textNav">Giỏ <br>hàng</span>
-            </li> --}}
-
             <li class="d-flex align-items-center gap-2 position-relative" onclick="openModal()">
                 <i class="fa-solid fa-cart-shopping icon"></i>
                 <span class="text-light textNav">Giỏ <br>hàng</span>
@@ -61,32 +56,36 @@
                     0
                 </div>
             </li>
-            
-            <div class="btn-group">
-                @if (Auth::check() && Auth::user()->role == 'user')
-                    <!-- Kiểm tra nếu người dùng đã đăng nhập và có role là 'user' -->
-                    <button type="button" class="btn btn-danger">{{ Auth::user()->name }}</button>
-                    <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <!-- Dropdown menu với button đăng xuất -->
-                    <ul class="dropdown-menu">
-                        <!-- Sử dụng form POST để đăng xuất -->
-                        <form action="{{ route('client.logout') }}" method="POST">
-                            @csrf <!-- Thêm token CSRF để bảo vệ form -->
-                            <li><button type="submit" class="dropdown-item">Đăng xuất</button></li>
-                        </form>
-                    </ul>
-                @else
-                    <a href="{{ route('client.login') }}" type="button" class="btn btn-danger">Đăng nhập</a>
-                    <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('client.register') }}">Đăng ký</a></li>
-                    </ul>
+
+            <div class="btn-group" id="btnAuth">
+                @if (Auth::check())
+                    <div class="menu">
+                        <div class="item">
+                            <a href="#" class="link">
+                                <span>{{ Auth::user()->name }}</span>
+                                <svg viewBox="0 0 360 360" xml:space="preserve">
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path id="XMLID_225_"
+                                            d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </a>
+                            <div class="submenu">
+                                <div class="submenu-item">
+
+                                    <form id="logoutForm" action="{{ route('client.logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a href="#" class="submenu-link"
+                                        onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Đăng
+                                        xuất</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
 
