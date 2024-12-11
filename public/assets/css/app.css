@@ -325,7 +325,7 @@ header {
 }
 
 .t_over {
-    max-height: 65px;
+    height: 65px;
     overflow-y: auto;
 }
 

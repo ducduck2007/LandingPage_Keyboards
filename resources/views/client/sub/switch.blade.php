@@ -29,7 +29,10 @@
                                     data-bs-target="#exampleModalCardPhim">
                                     {{ $ds->name_product }}</h5> --}}
                                 <h5 class="card-title mb-0" data-bs-toggle="modal" data-bs-target="#exampleModalPanel"
-                                    onclick="updateModalContent({{ json_encode($ds) }})">{{ $ds->name_product }}</h5>
+                                    onclick="updateModalContent({{ json_encode($ds) }})"
+                                    style="max-width: 15ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    {{ $ds->name_product }}
+                                </h5>
                                 <p class="card-text mb-0 t_over">{{ $ds->content }}</p>
                                 <div class="scene">
                                     <div class="cube">
