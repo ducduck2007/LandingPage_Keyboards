@@ -16,15 +16,13 @@
                 </div>
                 <div class="col">
                     <div class="fw-bold fs-6">THÔNG TIN</div>
-                    <div class="mucNho mt-3" style="font-size: 14px">muc1</div>
-                    <div class="mucNho" style="font-size: 14px">muc2</div>
-                    <div class="mucNho" style="font-size: 14px">muc3</div>
+                    <div class="mucNho mt-3" style="font-size: 14px">Hướng dẫn mua hàng</div>
+                    <div class="mucNho" style="font-size: 14px">Hướng dẫn thanh toán</div>
                 </div>
                 <div class="col">
                     <div class="fw-bold fs-6">THÔNG TIN NHÂN VIÊN HỖ TRỢ</div>
-                    <div class="mucNho mt-3" style="font-size: 14px">muc1</div>
-                    <div class="mucNho" style="font-size: 14px">muc2</div>
-                    <div class="mucNho" style="font-size: 14px">muc3</div>
+                    <div class="mucNho mt-3" style="font-size: 14px">Email</div>
+                    <div class="mucNho" style="font-size: 14px">Zalo</div>
                 </div>
             </div>
         </div>

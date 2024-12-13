@@ -230,11 +230,11 @@
                                 <ul class="socials mt-3 m-0 p-0 d-flex">
                                     @foreach ($contact as $item)
                                         @if ($item->hinh_thuc == 'mail')
-                                            <li><a href="{{ $item->link }}"><i class="fas fa-envelope"
-                                                        aria-hidden="true"></i></a></li>
+                                            <li><a target="_blank" href="{{ $item->link }}"><i
+                                                        class="fas fa-envelope" aria-hidden="true"></i></a></li>
                                         @elseif ($item->hinh_thuc == 'zalo')
-                                            <li><a href="{{ $item->link }}"><i class="fas fa-phone"
-                                                        aria-hidden="true"></i></a>
+                                            <li><a target="_blank" href="{{ $item->link }}"><i
+                                                        class="fas fa-phone" aria-hidden="true"></i></a>
                                             </li>
                                         @endif
                                     @endforeach
@@ -281,6 +281,13 @@
         }
 
         setInterval(updateCountdown, 1000);
+    });
+
+    document.addEventListener('click', function(event) {
+        const modalElement = document.querySelector('.modal');
+        if (modalElement && !modalElement.contains(event.target)) {
+            console.log('Clicked outside the modal!');
+        }
     });
 </script>
 <script>

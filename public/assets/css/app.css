@@ -1205,7 +1205,7 @@ header {
     --scale: 1;
 }
 
-@import url("s://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap"); */
 
 #buttons-auth .btn {
     display: flex;
